@@ -11,7 +11,7 @@ export const GET: APIRoute = async ({ request }) => {
         });
       
     const data: Shop = await response.json();
-    //await saveWinners(data);
+    await saveWinners(data);
     return new Response(JSON.stringify(data)
     )
 }
