@@ -1,0 +1,46 @@
+---
+import type { Item } from "../models/shop.type.ts";
+import ItemSection from "./ItemSection.astro";
+
+interface Props {
+    name: string;
+    id: string;
+    shop: Item[];
+}
+
+const { name, id, shop } = Astro.props;
+---
+
+<article class="w-full mx-auto" id={id}>
+    <h2 class="text-2xl">{name}</h2>
+    <ol class="grid grid-rows-2 gap-4 overflow-x-auto overflow-y-hidden grid-flow-col p-4 max-w-[100vw] auto-cols-[100px] md:auto-cols-[180px] pl-0 custom-scrollbar">
+        {
+            shop.map((item) => (
+                <ItemSection item={item}/>
+            ))
+        }
+    </ol> 
+</article>
+
+<style>
+    .custom-scrollbar::-webkit-scrollbar {
+        width: auto;
+        height: 10px;
+        background: #1b1d25;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #f3f4f61a;
+        border-radius: 2px;
+        border: 3px solid #1b1d25;
+        background-clip: content-box;
+        min-height: 40px;
+        min-width: 40px;
+        margin: 3px;
+
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #f3f4f6;
+    }
+</style>
