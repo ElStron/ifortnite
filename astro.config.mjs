@@ -4,9 +4,11 @@ import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
+  site: website,
+	server: {
+		host: true
+	},
   integrations: [tailwind({
     applyBaseStyles: true
-  })],
-  output: "server",
-  adapter: vercel()
+  })]
 });
