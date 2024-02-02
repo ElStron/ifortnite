@@ -12,5 +12,8 @@ const granted = item.granted.map((granted) => granted.images.background).join(',
 ---
 
 <li class={`${bundle} hover:scale-105 transition-all `}>
-    <img loading="lazy" class="h-full object-cover" src={item.displayAssets[0].background} alt={item.displayName} data-imgs={granted} />
+    <a href={`/cosmetic/${item.mainId}`}>
+        <img loading="lazy" class="h-full object-cover" src={item.displayAssets[0].background} alt={item.displayName} data-imgs={granted} />
+
+    </a>
 </li>

@@ -4,6 +4,8 @@ import Layout from '../layouts/Layout.astro';
 import type { Shop, Item } from '../models/shop.type.ts';
 import DailyShop from '../data/shop.json';
 
+export const prerender = true;
+
 const data = DailyShop as Shop | any;
 const shop = data.shop as Item[];
 const sections: { id: string; name: string; }[] = [];
