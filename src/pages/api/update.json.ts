@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import type { Shop } from '../../models/shop.type.ts';
 import { API_URLS } from '../../constants.ts';
+export const prerender = true;
 
 export const GET: APIRoute = async ({ request }) => {
     const response = await fetch( API_URLS.CREATIVE,
