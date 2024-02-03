@@ -1,16 +1,15 @@
+---
+interface Props {
+    title: string;
+    
+}
+const { title } = Astro.props;
+---
+
 <section class="w-full mx-auto p-6 bg-gray-800 rounded-2xl ">
-    <h2 class="text-lg font-bold text-gray-900 dark:text-white my-4">Best of UEFN</h2>
+    <h2 class="text-lg font-bold text-gray-900 dark:text-white my-4">{title}</h2>
     <ol class="w-full mx-auto grid grid-cols-5 gap-4 ">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>  
+        <slot/> 
     </ol>
 </section>
 <style>

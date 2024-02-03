@@ -1,16 +1,9 @@
 import type { APIRoute } from 'astro';
-import type { Shop } from '../../models/shop.type.ts';
-import { API_URLS } from '../../constants.ts';
 export const prerender = true;
 
-export const GET: APIRoute = async ({ request }) => {
-    const response = await fetch( API_URLS.ITEMS,
-        {
-          method: 'GET',
-          headers: { 'Authorization': import.meta.env.API_KEY, 'accept': 'application/json'},
-        });
-      
-    const data: Shop = await response.json();
+export const POST: APIRoute = async ({ request }) => {
+    const response = await fetch( 'https://api.vercel.com/v1/integrations/deploy/prj_xGNgyuZ9nCEW9YzRZTH7f5aepPjz/NihVGOB8wY' );  
+    const data = await response.json();
     return new Response(JSON.stringify(data)
     )
 }
