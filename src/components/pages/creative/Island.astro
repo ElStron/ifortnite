@@ -1,7 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { API_URLS } from '@/constants.ts';
-export const prerender = false;
 
 const response = await fetch(API_URLS.ISLAND + Astro.params.island, {
     method: 'GET',

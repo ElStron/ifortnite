@@ -1,6 +1,6 @@
 ---
-import BaseSection from "./BaseSection.astro";
-import IslandCard from '../IslandCard.astro';
+import BaseSection from "@/components/BaseSection.astro";
+import IslandCard from '@/components/IslandCard.astro';
 interface Props {
     title: string;
     
@@ -8,29 +8,19 @@ interface Props {
 const { title } = Astro.props;
 const response = await fetch('https://race.f1calendar.live/creative')
 const data = await response.json();
-const sections = data;
+const section = data.find((section: any) => section.category.label === title)
+
 ---
-{
-    sections.map((section: any) => {
-        if (section.islands.length > 0) {
-
+<BaseSection title={section.category.label}>
+    {
+        section.islands.map((island: any) => {
             return (
-                <BaseSection title={section.category.label}>
-                    {
-                        section.islands.map((island: any) => {
-                            return (
-                                <li>
-                                    <a href={`/creative/${island.islandCode}`}}>
-                                        <IslandCard code={island.islandCode} image={island.imgSrc} title={island.title} />
-                                    </a>
-                                </li>
-                            )
-                        })
-                    }
-                </BaseSection>
+                <li>
+                    <a href={`/creative/${island.islandCode}`}>
+                        <IslandCard code={island.islandCode} image={island.imgSrc} title={island.title} />
+                    </a>
+                </li>
             )
-        }
-        
-    })
-}
-
+        })
+    }
+</BaseSection>

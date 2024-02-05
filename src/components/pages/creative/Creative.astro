@@ -2,7 +2,6 @@
 import Layout from '@/layouts/Layout.astro';
 import BaseSection from '@/components/BaseSection.astro';
 import IslandCard from '@/components/IslandCard.astro';
-export const prerender = true;
 
 const response = await fetch('https://race.f1calendar.live/creative')
 const data = await response.json();

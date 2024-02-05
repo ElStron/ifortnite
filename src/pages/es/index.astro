@@ -1,0 +1,13 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Shop from '@/components/sections/Shop.astro';
+import Time from '@/components/sections/Time.astro';
+import Creative from '@/components/sections/Creative.astro';
+export const prerender = true;
+---
+
+<Layout title="Welcome to Ifornite.">
+    <Shop/>
+    <Time/>
+    <Creative title="Best of UEFN"/>
+</Layout>

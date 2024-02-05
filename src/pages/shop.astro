@@ -1,45 +1,6 @@
 ---
-import Section from '../components/Section.astro';
-import Layout from '../layouts/Layout.astro';
-import type { Shop, Item } from '../models/shop.type.ts';
-import DailyShop from '../data/shop.json';
-
+import ItemShop from '@/components/pages/ItemShop.astro';
 export const prerender = true;
-
-const data = DailyShop as Shop | any;
-const shop = data.shop as Item[];
-const sections: { id: string; name: string; }[] = [];
-
-for (const item of shop) {
-  const exists = sections.find((section) => section.name === item.section.name);
-  if (!exists) {
-    sections.push({ id: item.section.id, name: item.section.name });
-  }
-}
-
 ---
-<Layout title="Current Fortnite Item Shop">
 
-  <section class="w-full mx-auto p-6" id="hero">
-    <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
-      Current
-      <strong class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Fortnite</strong>
-      Item Shop
-    </h1>
-
-    <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-      Check out the current item shop. New items are added every 24 hours. Discover new items and get exclusive offers.
-      Skins, bundles, emotes, cosmetics, and more. Last updated on <span class="font-bold">{data.lastUpdate.date}</span>
-    </p>
-  </section>
-
-  <section class="w-full mx-auto">
-    <div class="w-full p-6 flex flex-col gap-8">
-      {
-        sections.map((section) => (
-          <Section id={section.id} name={section.name} shop={shop.filter((item) => item.section.name === section.name)} />
-        ))
-      }
-    </div>
-  </section>
-</Layout>
+<ItemShop />

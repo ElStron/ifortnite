@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro';
 import { API_URLS } from '@/constants.ts';
 export const prerender = false;
 
+const url = API_URLS.ISLAND + Astro.params.island + '&lang=es';
 const response = await fetch(API_URLS.ISLAND + Astro.params.island, {
     method: 'GET',
     headers: {
