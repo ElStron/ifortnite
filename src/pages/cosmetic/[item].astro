@@ -1,5 +1,5 @@
 ---
-import Layout from '@/layouts/Layout.astro';
+import Item from "@/components/pages/cosmetic/Item.astro";
 import { API_URLS } from '@/constants.ts';
 export const prerender = false;
 
@@ -12,8 +12,13 @@ const response = await fetch(API_URLS.ITEM_DETAILS + Astro.params.item, {
 })
 
 const data = await response.json();
-const item = data.item;
+
+if (!data.item) {
+    return Astro.redirect('/cosmetics', 301);
+}
+
+const cosmetic = data.item;
+
 ---
-<Layout title={item.name}>
-    <p>{item.description}</p>
-</Layout>
+
+<Item data={cosmetic} /> 
