@@ -14,5 +14,6 @@ export function useTranslations(lang: keyof typeof ui) {
 
 export function urlForLang(lang: keyof typeof ui, path: string) {
   if (lang === defaultLang) return path;
+  if (path === '#') return `#`
   return `/${lang}${path}`
 }
