@@ -1,5 +1,6 @@
 ---
 import type { Item } from "@/models/shop.type.ts";
+import Link from "@/components/Link.astro";
 interface Props {
     item: Item;
 }
@@ -12,8 +13,7 @@ const granted = item.granted.map((granted) => granted.images.background).join(',
 ---
 
 <li class={`${bundle} hover:scale-105 transition-all `}>
-    <a href={`/cosmetic/${item.mainId}`}>
+    <Link href={`/cosmetic/${item.mainId}`}>
         <img loading="lazy" class="h-full object-cover" src={item.displayAssets[0].background} alt={item.displayName} data-imgs={granted} />
-
-    </a>
+    </Link>
 </li>
