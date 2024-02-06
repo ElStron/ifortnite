@@ -8,7 +8,7 @@ const { title } = Astro.props;
 
 <section class="w-full mx-auto p-6 bg-gray-800 rounded-2xl ">
     <h2 class="text-lg font-bold text-gray-900 dark:text-white my-4">{title}</h2>
-    <ol class="w-full mx-auto grid grid-cols-5 gap-4 ">
+    <ol class="w-full mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 ">
         <slot/> 
     </ol>
 </section>
