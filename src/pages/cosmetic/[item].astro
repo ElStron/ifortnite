@@ -1,6 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { API_URLS } from '../../constants.ts';
+import Layout from '@/layouts/Layout.astro';
+import { API_URLS } from '@/constants.ts';
 
 const ItemUrl = API_URLS.ITEM_DETAILS + Astro.params.item;
 const response = await fetch(ItemUrl, {

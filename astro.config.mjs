@@ -7,5 +7,5 @@ export default defineConfig({
     applyBaseStyles: true
   })],
   output: "server",
-  adapter: cloudflare({ mode: 'directory' })
+  adapter: cloudflare()
 });
