@@ -1,4 +1,5 @@
 ---
+import Link from '@/components/Link.astro';
 interface Props {
     code: string;
     image: string;
@@ -6,16 +7,18 @@ interface Props {
 }
 const { code, image, title } = Astro.props;
 ---
-<article>
-    <header>
-        <picture>
-            <img src={image} alt={title} loading="lazy" width="100%" height="100%" />
-        </picture>
-    </header>
-    <footer>
-        <h3>{title}</h3>
-    </footer>
-</article>
+<Link href={`/creative/${code}`}>
+    <article>
+        <header>
+            <picture>
+                <img src={image} alt={title} loading="lazy" width="100%" height="100%" />
+            </picture>
+        </header>
+        <footer>
+            <h3>{title}</h3>
+        </footer>
+    </article>
+</Link>
 
 <style>
     article:hover {
