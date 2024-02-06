@@ -1,18 +1,18 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { API_URLS } from '@/constants.ts';
+export const prerender = false;
 
-const ItemUrl = API_URLS.ITEM_DETAILS + Astro.params.item;
-const response = await fetch(ItemUrl, {
+const response = await fetch(API_URLS.ITEM_DETAILS + Astro.params.item, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
         'Authorization': import.meta.env.API_KEY
     }
-}); 
-const itemData = await response.json();
-const item = itemData.item;
+})
 
+const data = await response.json();
+const item = data.item;
 ---
 <Layout title={item.name}>
 
