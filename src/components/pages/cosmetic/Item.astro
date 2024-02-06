@@ -1,19 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { API_URLS } from '@/constants.ts';
+interface Props {
+    data:string[] | any;
+}
 
-const ItemUrl = API_URLS.ITEM_DETAILS + Astro.params.item;
-const response = await fetch(ItemUrl, {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': import.meta.env.API_KEY
-    }
-}); 
-const itemData = await response.json();
-const item = itemData.item;
-
+const { data } = Astro.props;
 ---
-<Layout title={item.name}>
-
+<Layout title={data.name}>
+    <p>{data.description}</p>
 </Layout>
