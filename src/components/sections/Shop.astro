@@ -1,6 +1,6 @@
 ---
 import BaseSection from "@/components/BaseSection.astro";
-import { API_URLS } from "@/constants";
+import { API_URLS, URL_IMG } from "@/constants";
 import Card from "@/components/Card.astro";
 
 const response = await fetch(API_URLS.SHOP, {
@@ -21,7 +21,7 @@ const items = data.shop.filter((item: any) => item.displayType === 'Outfit');
                 <li>
                     <Card 
                         href={`/cosmetic/${item.mainId}`} 
-                        image={item.displayAssets[0].background} 
+                        image={URL_IMG(item.displayAssets[0].materialInstance.toLowerCase())} 
                         title={item.displayName} 
                     />
                 </li>

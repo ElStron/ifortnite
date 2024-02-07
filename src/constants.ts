@@ -7,3 +7,5 @@ export const API_URLS = {
     'ISLAND': 'https://fortniteapi.io/v1/creative/island?code=',
     'FEATURED': 'https://fortniteapi.io/v1/creative/featured'
 }
+
+export const URL_IMG = (id: string) => `https://fortnite-api.com/images/cosmetics/br/materialinstances/${id}/background_v1-2.webp`;
