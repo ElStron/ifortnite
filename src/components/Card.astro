@@ -10,7 +10,7 @@ interface Props {
 const { href, image, title, priority = 'low', granted } = Astro.props;
 ---
 <Link href={href}>
-    <article>
+    <article class="w-full relative">
         <header>
             <picture>
                 <img src={image} 
@@ -22,8 +22,8 @@ const { href, image, title, priority = 'low', granted } = Astro.props;
                 />
             </picture>
         </header>
-        <footer>
-            <h3>{title}</h3>
+        <footer class="w-full absolute bottom-0 left-0 bg-gradient-to-t	from-gray-800 to-transparent">
+            <h3 class="text-sm font-nomal text-slate-200 my-2 mx-4">{title}</h3>
         </footer>
     </article>
 </Link>

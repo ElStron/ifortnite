@@ -38,19 +38,16 @@ items = items.slice(0, 30);
         {
             items.map((item: any, index : number) => {
 
-                const priority = index < 5 ? 'high' : 'low';
                 const img = item.images.full_background === null 
 
                     ? item.images.icon_background.replace('icon_background', 'background') 
                     : item.images.icon_background;
 
-                
                 return (
                     <li>
                         <Card 
                             href={`/cosmetic/${item.id}`} 
                             image={img} title={item.name} 
-                            priority={priority} 
                         />
                     </li>
                 )

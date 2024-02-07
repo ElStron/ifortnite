@@ -1,9 +1,11 @@
 ---
 import BaseSection from "@/components/BaseSection.astro";
-import { API_URLS, URL_IMG } from "@/constants";
+import { API_URLS, URL_IMG } from "@/constants.ts";
 import Card from "@/components/Card.astro";
 
-const response = await fetch(API_URLS.SHOP, {
+const { currentLocale } = Astro
+
+const response = await fetch(API_URLS.SHOP+'?lang='+currentLocale, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
@@ -13,7 +15,6 @@ const response = await fetch(API_URLS.SHOP, {
 const data = await response.json();
 const items = data.shop.filter((item: any) => item.displayType === 'Outfit');
 ---
-
 <BaseSection title="Shop">
     {
         items.map((item: any) => {
