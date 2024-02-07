@@ -2,8 +2,8 @@
 import Layout from '@/layouts/Layout.astro';
 import { API_URLS } from '@/constants.ts';
 export const prerender = false;
-
-const response = await fetch(API_URLS.ISLAND + Astro.params.island, {
+const { currentLocale } = Astro
+const response = await fetch(API_URLS.ISLAND + Astro.params.island+'&lang='+currentLocale, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
