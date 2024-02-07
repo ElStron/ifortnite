@@ -13,6 +13,7 @@ const response = await fetch(API_URLS.SHOP+'?lang='+currentLocale, {
     }
 })
 const data = await response.json();
+console.log(data)
 const items = data.shop.filter((item: any) => item.displayType === 'Outfit');
 ---
 <BaseSection title="Shop">
