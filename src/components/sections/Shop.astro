@@ -5,7 +5,7 @@ import Card from "@/components/Card.astro";
 
 const { currentLocale } = Astro
 
-const response = await fetch(API_URLS.SHOP+'?lang='+currentLocale, {
+const response = await fetch(API_URLS.ITEM_SHOP+'?lang='+currentLocale, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
@@ -13,11 +13,11 @@ const response = await fetch(API_URLS.SHOP+'?lang='+currentLocale, {
     }
 })
 const data = await response.json();
-console.log(data)
-const items = data.shop.filter((item: any) => item.displayType === 'Outfit');
+const items = data.shop.filter((item: any) => item.mainType === 'outfit');
 ---
 <BaseSection title="Shop">
     {
+        items &&
         items.map((item: any) => {
             return (
                 <li>
