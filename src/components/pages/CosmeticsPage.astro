@@ -1,0 +1,60 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import BaseSection from '@/components/BaseSection.astro';
+import Card from '@/components/Card.astro';
+import Filter from '@/components/Filter.astro';
+import { API_URLS } from '@/constants.ts';
+
+const { currentLocale } = Astro
+const response = await fetch(API_URLS.ITEMS + '?lang='+currentLocale, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': import.meta.env.API_KEY
+    }
+})
+const data = await response.json();
+let items = data.items.sort((a: any, b: any) => {
+  const dateA = a.releaseDate ? new Date(a.releaseDate) : null;
+  const dateB = b.releaseDate ? new Date(b.releaseDate) : null;
+
+  if (dateA === null && dateB === null) {
+    return 0;
+  }
+  if (dateA === null) {
+    return 1;
+  }
+  if (dateB === null) {
+    return -1;
+  }
+
+  return dateB.getTime() - dateA.getTime();
+});
+items = items.slice(0, 30);
+---
+<Layout title="Cosmetics">
+    <Filter/>
+    <BaseSection title="Cosmetics">
+        {
+            items.map((item: any, index : number) => {
+
+                const priority = index < 5 ? 'high' : 'low';
+                const img = item.images.full_background === null 
+
+                    ? item.images.icon_background.replace('icon_background', 'background') 
+                    : item.images.icon_background;
+
+                
+                return (
+                    <li>
+                        <Card 
+                            href={`/cosmetic/${item.id}`} 
+                            image={img} title={item.name} 
+                            priority={priority} 
+                        />
+                    </li>
+                )
+            })
+        }
+    </BaseSection>
+</Layout>
