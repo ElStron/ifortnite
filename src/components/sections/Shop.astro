@@ -1,22 +1,31 @@
 ---
 import BaseSection from "@/components/BaseSection.astro";
+import { API_URLS } from "@/constants";
+import Card from "@/components/Card.astro";
+
+const response = await fetch(API_URLS.SHOP, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': import.meta.env.API_KEY
+    }
+})
+const data = await response.json();
+const items = data.shop.filter((item: any) => item.displayType === 'Outfit');
 ---
 
 <BaseSection title="Shop">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-</BaseSection>
-<style>
-    li {
-        background-color: tomato;
-        width: 100%;
-        height: 180px;
-        border-radius: 10px;
+    {
+        items.map((item: any) => {
+            return (
+                <li>
+                    <Card 
+                        href={`/cosmetic/${item.mainId}`} 
+                        image={item.displayAssets[0].background} 
+                        title={item.displayName} 
+                    />
+                </li>
+            )
+        })
     }
-</style>
+</BaseSection>
