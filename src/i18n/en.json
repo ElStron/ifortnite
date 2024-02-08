@@ -1,0 +1,95 @@
+{
+    "HOME": {
+        "TITLE_SEO": "ifortnite.com - Everything about Fortnite (cosmetics, shop, news, and pro settings)",
+        "DESCRIPTION_SEO": "At ifortnite.com, you will find a list of cosmetics, news, the official store, creative islands, events, leaks of new cosmetics, and more. (Fortnite)",
+        "TITLE": "Fortnite",
+        "DESCRIPTION": "Fortnite is a game where you and your friends team up to battle in 100-player online battle arenas. Play as modes like Fortnite, Fortnite: The Game, and Fortnite: New World.",
+        "COUNTER_TITLE": "New Items in:",
+        "COUNTER_DESCRIPTION": "Stay tuned for the latest Fortnite cosmetics updates once the countdown reaches zero, with new items every day!",
+        "TITLE_2": "Fortnite Hub: Cosmetics, News & More"
+    },
+    "COSMETICS": {
+        "TITLE_SEO": "Cosmetics",
+        "DESCRIPTION_SEO": "Cosmetics are the building blocks of the world of Fortnite.",
+        "TITLE": "Cosmetics",
+        "DESCRIPTION": "Cosmetics are the building blocks of the world of Fortnite. Check out our collection of cosmetics, hats, and more!",
+        "UPCOMING": {
+            "TITLE_SEO": "Upcoming",
+            "DESCRIPTION_SEO": "Upcoming cosmetics",
+            "TITLE": "Upcoming",
+            "DESCRIPTION": "Upcoming cosmetics"
+        },
+        "COSMETIC": {
+            "TITLE_SEO": "Cosmetics",
+            "DESCRIPTION_SEO": "Cosmetics in the store | iFortnite.com",
+            "TITLE": "Cosmetics",
+            "DESCRIPTION": "Cosmetics in the store"
+        }
+    },
+    "SHOP": {
+        "TITLE_SEO": "Today's Current FORTNITE ITEM SHOP | iFortnite.com",
+        "DESCRIPTION_SEO": "Daily updates from the Fortnite Shop, discover the latest items (cosmetics, emotes, skins, and more). Receive updates every day for Fortnite Battle Royale.",
+        "TITLE": "Current <strong class='text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400'>Fortnite</strong> Item Shop",
+        "DESCRIPTION": "Check out the current item shop. New items are added every 24 hours. Discover new items and get exclusive offers. Skins, bundles, emotes, cosmetics, and more. Last updated on "
+    },
+    "CREATIVE": {
+        "TITLE_SEO": "Creative",
+        "DESCRIPTION_SEO": "Creative islands are where you can explore the world of Fortnite.",
+        "TITLE": "Creative",
+        "DESCRIPTION": "Creative islands are where you can explore the world of Fortnite.",
+        "ISLAND": {
+            "TITLE_SEO": "Islan",
+            "DESCRIPTION_SEO": "Isla de la tienda de objetos de FORTNITE de hoy | iFortnite.com",
+            "TITLE": "Isla",
+            "DESCRIPTION": "Isla de la tienda de objetos de <strong class='text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400'>Fortnite</strong>"
+        }
+    },
+    "EVENTS": {
+        "TITLE_SEO": "Events",
+        "DESCRIPTION_SEO": "Events about the world of Fortnite.",
+        "TITLE": "Events",
+        "DESCRIPTION": "Events about the world of Fortnite."
+    },
+    "LEAKS": {
+        "TITLE_SEO": "Leaks",
+        "DESCRIPTION_SEO": "Leaks about the world of Fortnite.",
+        "TITLE": "Leaks",
+        "DESCRIPTION": "Leaks about the world of Fortnite."
+    },
+    "WEAPONS": {
+        "TITLE_SEO": "Weapons",
+        "DESCRIPTION_SEO": "Weapons are the building blocks of the world of Fortnite.",
+        "TITLE": "Weapons",
+        "DESCRIPTION": "Weapons are the building blocks of the world of Fortnite. Check out our collection of weapons, hats, and more!"
+    },
+    "MODES": {
+        "TITLE_SEO": "Modes",
+        "DESCRIPTION_SEO": "Modes about the world of Fortnite.",
+        "TITLE": "Modes",
+        "DESCRIPTION": "Modes about the world of Fortnite."
+    },
+    "BEST_SETTINGS": {
+        "TITLE_SEO": "Best Settings",
+        "DESCRIPTION_SEO": "Best settings about the world of Fortnite.",
+        "TITLE": "Best Settings",
+        "DESCRIPTION": "Best settings about the world of Fortnite."
+    },
+    "GLOBAL_PLAYERS_COUNT" :{
+        "TITLE_SEO": "Global Players Count",
+        "DESCRIPTION_SEO": "Global Players Count about the world of Fortnite.",
+        "TITLE": "Global Players Count",
+        "DESCRIPTION": "Global Players Count about the world of Fortnite."
+    },
+    "NEWS": {
+        "TITLE_SEO": "News",
+        "DESCRIPTION_SEO": "News about the world of Fortnite.",
+        "TITLE": "News",
+        "DESCRIPTION": "News about the world of Fortnite."
+    },
+    "SECTIONS": {
+        "CREATIVE": "Creative",
+        "NEWS": "News",
+        "COSMETICS": "Cosmetics",
+        "SHOP": "Item Shop"
+    }
+}
