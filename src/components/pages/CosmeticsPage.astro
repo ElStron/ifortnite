@@ -4,8 +4,10 @@ import BaseSection from '@/components/BaseSection.astro';
 import Card from '@/components/Card.astro';
 import Filter from '@/components/Filter.astro';
 import { API_URLS } from '@/constants.ts';
-
+import { getI18N } from "@/i18n"
 const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
 const response = await fetch(API_URLS.ITEMS + '?lang='+currentLocale, {
     method: 'GET',
     headers: {
@@ -32,9 +34,9 @@ let items = data.items.sort((a: any, b: any) => {
 });
 items = items.slice(0, 30);
 ---
-<Layout title="Cosmetics">
+<Layout title={i18n.COSMETICS.TITLE_SEO} description={i18n.COSMETICS.DESCRIPTION_SEO}>
     <Filter/>
-    <BaseSection title="Cosmetics">
+    <BaseSection title={i18n.SECTIONS.COSMETICS}>
         {
             items.map((item: any, index : number) => {
 

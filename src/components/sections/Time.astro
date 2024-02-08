@@ -1,4 +1,9 @@
 ---
+interface Props {
+    title: string;
+    description: string;
+}
+const { title, description } = Astro.props;
 const url = 'https://media.fortniteapi.io/images/displayAssets/v2/BattleRoyale/DAv2_Sparks_Keytar_Wafer/MI_Sparks_Keytar_Wafer.png'
 ---
 
@@ -9,10 +14,10 @@ const url = 'https://media.fortniteapi.io/images/displayAssets/v2/BattleRoyale/D
     <div class="timer w-full max-h-[120px] bg-sky-700 rounded-r-full flex items-center justify-between">
         <div class="w-full p-6">
             <h2 class="text-lg font-bold text-white my-4">
-                New Items in:
+                {title}
             </h2>
             <p class="text-lg font-normal text-white">
-                Stay tuned for the latest Fortnite cosmetics updates once the countdown reaches zero, with new items every day!
+                {description}
             </p>
         </div> 
         <div class="w-full p-6 max-w-[100%] md:max-w-[30%]">
