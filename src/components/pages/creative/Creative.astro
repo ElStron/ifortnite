@@ -17,12 +17,18 @@ const sections = data;
     
             return (
                 section.islands.length > 0 &&
-                <BaseSection title={section.category.label}>
+                <BaseSection 
+                    title={section.category.label}
+                >
                     {
                         section.islands.map((island: any) => {
                             return (
                                 <li>
-                                    <IslandCard code={island.islandCode} image={island.imgSrc} title={island.title} />
+                                    <IslandCard 
+                                        code={island.islandCode} 
+                                        image={island.imgSrc} 
+                                        title={island.title} 
+                                    />
                                 </li>
                             )
                         })
