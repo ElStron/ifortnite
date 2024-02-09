@@ -8,7 +8,7 @@ import { getCosmetics } from '@/services/cosmetics.ts'
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
-const data = await getCosmetics({ lang: currentLocale, type: 'bundle' });
+const data = await getCosmetics({ lang: currentLocale, type: 'outfit' });
 
 let items = data.sort((a: any, b: any) => {
   const dateA = a.releaseDate ? new Date(a.releaseDate) : null;
