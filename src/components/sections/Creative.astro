@@ -17,7 +17,11 @@ const section = data.find((section: any) => section.category.label === title)
             return (
                 <li>
                     <a href={`/creative/${island.islandCode}`}>
-                        <IslandCard code={island.islandCode} image={island.imgSrc} title={island.title} />
+                        <IslandCard 
+                            code={island.islandCode} 
+                            image={island.imgSrc} 
+                            title={island.title} 
+                        />
                     </a>
                 </li>
             )
