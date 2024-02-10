@@ -13,7 +13,9 @@ const { href, image, title, priority = 'low', granted } = Astro.props;
     <article class="w-full relative">
         <header>
             <picture>
-                <img src={image} 
+                <img 
+                    class="w-full h-full rounded-2xl aspect-[1/1]"
+                    src={image} 
                     alt={title} 
                     loading="lazy" 
                     width="100%" 
@@ -35,11 +37,16 @@ const { href, image, title, priority = 'low', granted } = Astro.props;
         transition: all .2s ease-in-out;
         
     }
-    img {
+    article::after {
+        content: '';
+        position: absolute;
         width: 100%;
         height: 100%;
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
+        top: 0;
+        left: 0;
+        background: #36364f;
         border-radius: 10px;
+        z-index: -1;
     }
+
 </style>
