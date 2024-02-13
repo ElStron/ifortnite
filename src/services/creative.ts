@@ -2,7 +2,7 @@ import { creativeList } from "./endpoints"
 import { fetchItems } from "./fetch"
 
 
-const pagination = (data: any, page: number, itemsPerPage: number) => {
+const pagination = (data: any, page: number, itemsPerPage: number | undefined) => {
     const itemsNumber = itemsPerPage ? itemsPerPage : 10
     const items = data.slice(page * itemsNumber, (page + 1) * itemsNumber)
     return items
