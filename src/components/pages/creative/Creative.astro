@@ -2,41 +2,33 @@
 import Layout from '@/layouts/Layout.astro';
 import BaseSection from '@/components/BaseSection.astro';
 import IslandCard from '@/components/IslandCard.astro';
+import IslandSections from '@/components/IslandSections.tsx';
 import { getI18N } from "@/i18n"
 import { getCreative } from '@/services/creative.ts'
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
-
+const lang = currentLocale as string
 const sections = await getCreative({lang: currentLocale});
 ---
 
 <Layout title={i18n.CREATIVE.TITLE_SEO} description={i18n.CREATIVE.DESCRIPTION_SEO}>
-    {
-        sections.map((section: any) => {
-    
-            return (
-                section.islands.length > 0 &&
-                <BaseSection 
-                    title={section.category.label}
+    <BaseSection 
+                    title={sections[1].category.label}
                 >
-                    {
-                        section.islands.map((island: any) => {
-                            return (
-                                <li>
-                                    <IslandCard 
-                                        code={island.islandCode} 
-                                        image={island.imgSrc} 
-                                        title={island.title} 
-                                    />
-                                </li>
-                            )
-                        })
-                    }
-                </BaseSection>
-            )
-            
-        })
-    }
-    
+        {
+            sections[1].islands.map((island: any) => {
+                return (
+                    <li>
+                        <IslandCard 
+                            code={island.islandCode} 
+                            image={island.imgSrc} 
+                            title={island.title}
+                        />
+                    </li>
+                )
+            })
+        }
+    </BaseSection>
+    <IslandSections lang={lang} page={2} client:load />
 </Layout>
