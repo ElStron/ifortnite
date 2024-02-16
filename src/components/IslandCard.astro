@@ -11,7 +11,14 @@ const { code, image, title } = Astro.props;
     <article class="w-full relative">
         <header>
             <picture>
-                <img src={image} alt={title} loading="lazy" width="100%" height="100%" class="w-full rounded-2xl aspect-[3/2]" />
+                <img 
+                    src={image} 
+                    alt={title} 
+                    loading="lazy" 
+                    width="100%" 
+                    height="100%" 
+                    class="w-full rounded-2xl aspect-[3/2]"
+                />
             </picture>
         </header>
         <footer class="w-full absolute bottom-0 left-0 bg-gradient-to-t	from-gray-900 to-transparent">
