@@ -8,12 +8,13 @@ interface Props {
     shop: Item[];
 }
 
-const { name, id, shop } = Astro.props;
+const {id, shop, name } = Astro.props;
+shop.sort((a,b) => b.price.regularPrice - a.price.regularPrice)
 ---
 
-<article class="w-full mx-auto" id={id}>
-    <h2 class="text-2xl">{name}</h2>
-    <ol class="grid grid-rows-2 gap-4 overflow-x-auto overflow-y-hidden grid-flow-col p-4 max-w-[100vw] auto-cols-[100px] md:auto-cols-[180px] pl-0 custom-scrollbar">
+<article class="w-full" id={id}>
+    <h2 class="text-lg font-black text-gray-900 dark:text-white my-4 italic uppercase">{name}</h2>
+    <ol class="mx-auto h-[370px] max-h-full grid grid-rows-2 gap-x-2 gap-y-8 grid-flow-col p-4 w-full auto-cols-[100px] md:auto-cols-[200px] pl-0">
         {
             shop.map((item) => (
                 <ItemSection item={item}/>
@@ -22,25 +23,48 @@ const { name, id, shop } = Astro.props;
     </ol> 
 </article>
 
-<style>
-    .custom-scrollbar::-webkit-scrollbar {
-        width: auto;
-        height: 10px;
-        background: #1b1d25;
+<style is:inline>
+    /* Ensure h2 elements always take up their full height, even if content is shorter */
+    h2 {
+    display: block;
+    line-height: 1.5; /* Adjust as needed for your font and spacing */
     }
 
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #f3f4f61a;
-        border-radius: 2px;
-        border: 3px solid #1b1d25;
-        background-clip: content-box;
-        min-height: 40px;
-        min-width: 40px;
-        margin: 3px;
-
+    /* Use a dedicated animation-timeline and animation-name for h2 */
+    h2 {
+    view-timeline-name: --h2;
+    view-timeline-axis: block;
+    animation-timeline: var(--h2);
+    animation-name: h2FadeIn;
+    animation-duration: 1s; /* Adjust timing as desired */
+    animation-fill-mode: forwards; /* Prevent flickering on repeat */
     }
 
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background: #f3f4f6;
+    /* Define the custom h2FadeIn animation for smooth appearance */
+    @keyframes h2FadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(50px); /* Optional vertical offset for effect */
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    img {
+        view-timeline-name: --image;
+        view-timeline-axis: block;
+        animation-timeline: --image;
+        animation-name: mymove;
+        animation-range: entry 15% cover 30%;
+        animation-fill-mode: both;
+    }
+    @keyframes mymove {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
     }
 </style>
