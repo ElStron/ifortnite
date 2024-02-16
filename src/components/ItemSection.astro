@@ -12,8 +12,14 @@ const bundle = item.displayName.toLowerCase().includes("bundle") ? "row-span-2 c
 const granted = item.granted.map((granted) => granted.images.background).join(', ');
 ---
 
-<li class={`${bundle} hover:scale-105 transition-all `}>
+<li class={`${bundle} rounded-lg`} >
     <Link href={`/cosmetic/${item.mainId}`}>
-        <img loading="lazy" class="h-full object-cover" src={item.displayAssets[0].background} alt={item.displayName} data-imgs={granted} />
+        <img 
+            class="h-full object-cover rounded-lg hover:scale-105 hover:ring-2 hover:ring-white transition-all" 
+            src={item.displayAssets[0].background} 
+            alt={item.displayName} 
+            data-imgs={granted} 
+            loading="lazy"
+        />
     </Link>
 </li>
