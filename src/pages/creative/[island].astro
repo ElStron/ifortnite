@@ -6,7 +6,7 @@ export const prerender = false;
 const { currentLocale } = Astro
 const code = Astro.params.island as string;
 const data = await getIsland({ code: code, lang: currentLocale })
-if (!data.response || data.code === 'INVALID_CODE') {
+if (data.code === 'INVALID_CODE') {
     return Astro.redirect('/404', 301);
 }
 ---
