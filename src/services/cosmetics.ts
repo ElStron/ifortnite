@@ -1,4 +1,4 @@
-import { itemList } from "./endpoints"
+import { itemList, itemDetails } from "./endpoints"
 import { fetchData } from "./fetch"
 
 const filterItemsByType =  (type: string, items: any) => {
@@ -21,4 +21,15 @@ export const getCosmetics = async ( {
     if (type) return filterItemsByType(type, items)
 
     return items
+}
+
+export const getCosmetic = async ( { 
+    lang = 'en',
+    id 
+}:{ 
+    lang: string | undefined, 
+    id: string
+}) => {
+    const data = await fetchData(itemDetails({ lang: lang, id: id }))
+    return data
 }
