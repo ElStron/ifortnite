@@ -20,7 +20,7 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
                 <span class="px-3 py-1 rounded bg-cyan-800">{data.rarity.name}</span>
                 <span>{data.type.name}</span>
             </div>
-            <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 dark:text-white "><i>{data.name}</i></h1>
+            <h1 class="text-2xl lg:text-5xl font-bold text-gray-900 dark:text-white "><i>{data.name}</i></h1>
             <p class="text-lg font-normal text-gray-500 dark:text-gray-400 py-4">{data.description}</p>
             {
                 data.type.name === "Jam Track" && <ButtonPlayer track={data.name} client:load />
@@ -34,22 +34,23 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
                 : <Vynil img={image}/> 
             }
         </section>
-        <section id="components" class="w-full flex flex-col gap-4 pb-8">
-            <h2 class="text-lg font-black text-gray-900 dark:text-white my-4 italic uppercase">
+        <section id="components" class="w-full flex flex-col gap-4 lg:pb-8 overflow-auto lg:overflow-x-visible relative">
+            <h2 class="text-lg font-black text-gray-900 dark:text-white my-4 italic uppercase hidden lg:flex">
                 Cosmetics
             </h2>
-            <div class="w-full h-full flex flex-row flex-wrap gap-4">
+            <div class="flex flex-nowrap lg:flex-wrap gap-4 py-4 lg:py-0 pl-2 lg:pl-0">
                 {
                     grants && grants.map((grant: any) => {
                         return (
-                            <Link href={`/cosmetic/${grant.id}`}>
+                            <Link href={`/cosmetic/${grant.id}`} class="w-[100px] h-[100px] flex-none">
                                 <img
-                                    class="w-[100px] h-[100px] object-cover rounded-lg shadow-lg bg-[rgba(0,0,0,0.2)] cursor-pointer hover:scale-110 transition-all" 
+                                    class="w-full h-full object-cover rounded-lg shadow-lg bg-[rgba(0,0,0,0.2)] cursor-pointer hover:scale-110 transition-all" 
                                     src={grant.images.icon}
                                     title={grant.name}
                                     width="100"
                                     height="100" 
-                                    alt={grant.name}  
+                                    alt={grant.name}
+                                    loading="lazy"  
                                 />
                             </Link>
                         )
@@ -94,6 +95,7 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
     }
     #components {
         grid-area: c;
+        scrollbar-color: #f3f4f61a rgb(27 29 37 / 17%);
     }
     #item {
         width: 100%;
@@ -105,7 +107,7 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
     }
     @media screen and (max-width: 768px) {
         #grid__container {
-            grid-template-areas: "a" "b" "c";
+            grid-template-areas: "b" "c" "a";
             grid-template-rows: auto auto auto;
         }
         #hero {
