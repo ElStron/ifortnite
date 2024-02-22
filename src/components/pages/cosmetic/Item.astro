@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import ButtonPlayer from '@/components/ButtonPlayer';
 import Vynil from '@/components/Vynil.astro';
+import Link from '@/components/Link.astro';
 
 interface Props {
     data:string[] | any;
@@ -11,7 +12,6 @@ const { data } = Astro.props;
 const grants = data.grants
 const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.images.icon;
 
-console.log(data)
 ---
 <Layout title={data.name}>
     <div class="w-full mx-auto relative gap-4" id="grid__container">
@@ -20,7 +20,7 @@ console.log(data)
                 <span class="px-3 py-1 rounded bg-cyan-800">{data.rarity.name}</span>
                 <span>{data.type.name}</span>
             </div>
-            <h1 class="text-5xl font-bold text-gray-900 dark:text-white "><i>{data.name}</i></h1>
+            <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 dark:text-white "><i>{data.name}</i></h1>
             <p class="text-lg font-normal text-gray-500 dark:text-gray-400 py-4">{data.description}</p>
             {
                 data.type.name === "Jam Track" && <ButtonPlayer track={data.name} client:load />
@@ -42,14 +42,16 @@ console.log(data)
                 {
                     grants && grants.map((grant: any) => {
                         return (
-                            <img
-                                class="w-[100px] h-[100px] object-cover rounded-lg shadow-lg bg-[rgba(0,0,0,0.2)] cursor-pointer hover:scale-110 transition-all" 
-                                src={grant.images.icon}
-                                title={grant.name}
-                                width="100"
-                                height="100" 
-                                alt={grant.name}  
-                            />
+                            <Link href={`/cosmetic/${grant.id}`}>
+                                <img
+                                    class="w-[100px] h-[100px] object-cover rounded-lg shadow-lg bg-[rgba(0,0,0,0.2)] cursor-pointer hover:scale-110 transition-all" 
+                                    src={grant.images.icon}
+                                    title={grant.name}
+                                    width="100"
+                                    height="100" 
+                                    alt={grant.name}  
+                                />
+                            </Link>
                         )
                     })
                 }
@@ -61,9 +63,9 @@ console.log(data)
 <style>
     #grid__container {
         display: grid;
-        grid-template-areas: "a b" "a c";
+        grid-template-areas: "a b" "c c";
         grid-template-columns: auto 1fr;
-        grid-template-rows: auto ;
+        grid-template-rows: 59svh auto;
     }
     #hero::before {
         content: "";
@@ -104,6 +106,15 @@ console.log(data)
     @media screen and (max-width: 768px) {
         #grid__container {
             grid-template-areas: "a" "b" "c";
+            grid-template-rows: auto auto auto;
+        }
+        #hero {
+            width: 100%;
+            height: 100%;
+        }
+        #item {
+            -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
         }
     }
 </style>
