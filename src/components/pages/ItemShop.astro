@@ -77,4 +77,44 @@ for (const item of shop) {
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background: #f3f4f6;
     }
+    h2 {
+    display: block;
+    line-height: 1.5; 
+    }
+
+    h2 {
+    view-timeline-name: --h2;
+    view-timeline-axis: block;
+    animation-timeline: var(--h2);
+    animation-name: h2FadeIn;
+    animation-duration: 1s; /* Adjust timing as desired */
+    animation-fill-mode: forwards; /* Prevent flickering on repeat */
+    }
+
+    @keyframes h2FadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(50px); /* Optional vertical offset for effect */
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    img {
+        view-timeline-name: --image;
+        view-timeline-axis: block;
+        animation-timeline: --image;
+        animation-name: mymove;
+        animation-range: entry 15% cover 30%;
+        animation-fill-mode: both;
+    }
+    @keyframes mymove {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 </style>
