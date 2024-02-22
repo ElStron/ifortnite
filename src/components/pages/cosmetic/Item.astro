@@ -34,7 +34,7 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
                 : <Vynil img={image}/> 
             }
         </section>
-        <section id="components" class="w-full flex flex-col gap-4 lg:pb-8 overflow-x-auto lg:overflow-x-visible relative">
+        <section id="components" class="w-full h-full flex flex-col gap-4 lg:pb-8 overflow-x-auto lg:overflow-x-visible relative">
             <h2 class="text-lg font-black text-gray-900 dark:text-white my-4 italic uppercase hidden lg:flex">
                 Cosmetics
             </h2>
@@ -108,7 +108,7 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
     @media screen and (max-width: 768px) {
         #grid__container {
             grid-template-areas: "b" "c" "a";
-            grid-template-rows: auto auto auto;
+            grid-template-rows: auto 150px auto;
         }
         #hero {
             width: 100%;
