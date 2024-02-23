@@ -1,17 +1,10 @@
 import type { APIRoute } from 'astro';
-
-import { API_URLS } from '@/constants.ts';
+import { getDailyShop } from '@/services/dailyShop';
+export const prerender = true;
 
 export async function ShopItems() {
-  const response = await fetch(API_URLS.SHOP, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': import.meta.env.API_KEY
-    }
-  }); 
 
-  const data = await response.json();
+  const data = await getDailyShop({ lang: 'en' });
   const shop = data.shop;
   return shop
 }
