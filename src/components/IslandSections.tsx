@@ -30,7 +30,7 @@ export default function IslandSections({lang, page = 1}: {lang: string, page?: n
                     <ol class="w-full mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4: lg:grid-cols-5 gap-6">
                         {item.islands.map((island: any) => (
                             <li className="island" key={island.code}>
-                                <a href={lang === 'es' ? `/en/creative/${island.islandCode}` : `/creative/${island.islandCode}` }>
+                                <a href={lang === 'es' ? `/es/creative/${island.islandCode}` : `/creative/${island.islandCode}` }>
                                     <article class="w-full relative">
                                         <header>
                                             <picture>
