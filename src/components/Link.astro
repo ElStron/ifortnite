@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { getLangFromUrl, urlForLang } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+type Props = HTMLAttributes<'a'>;
+
+const { href = '', class: className, ...props } = Astro.props;
+const langHref = urlForLang(lang, href as string);
+const { pathname } = Astro.url;
+const isActive = langHref === pathname || href === pathname.replace(/\/$/, '');
+---
+
+<a href={langHref} class={className} {...props}>
+    <slot />
+</a>

@@ -1,19 +1,18 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import { API_URLS } from '@/constants.ts';
+import ItemDetails from "@/components/pages/cosmetic/ItemDetails.astro";
+import { getCosmetic } from "@/services/cosmetics.ts";
+export const prerender = false;
 
-const ItemUrl = API_URLS.ITEM_DETAILS + Astro.params.item;
-const response = await fetch(ItemUrl, {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': import.meta.env.API_KEY
-    }
-}); 
-const itemData = await response.json();
-const item = itemData.item;
+const id = Astro.params.item as string
+const { currentLocale } = Astro
+const data = await getCosmetic({ lang: currentLocale, id: id })
+
+if (!data.item) {
+    return Astro.redirect('/cosmetics', 301);
+}
+
+const cosmetic = data.item;
 
 ---
-<Layout title={item.name}>
 
-</Layout>
+<ItemDetails data={cosmetic} /> 

@@ -15,12 +15,13 @@ export default {
     },
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '101 76 255 / <alpha-value>)',
-          '500': '78 55 222 / <alpha-value>)',
+        primary: '#3b3958',
+        secondary: {
+          DEFAULT: '#00fff0',
+          500: '#00e4d7'
         },
         accent: {
-          DEFAULT: "#3b3958", // for light #00dbc9 for dark ##00ffea
+          DEFAULT: '#1a34f5',
         },
         gray: {
           '100': '#f5f4fe',
@@ -28,46 +29,39 @@ export default {
           '180': '#D8D8E6',
           '200': '#cecdd8',
           '300': '#b5b4bd',
-          DEFAULT: '#a3a9c1',
-          '500': '#7a809b',
-          '600': '#303448',
-          '650': '#3d4151',
-          '700': '#20222e',
-          '800': '#1c1e28',
-          '900': '#151720',
+          '500': '#767588',
+          '700': '#33334d',
+          '800': '#29293d',
+          '900': '#1b1b29',
         },
         violet: {
           '300': '#bebce4'
         },
         social: {
-          'facebook': '#3b57fc',
-          'twitter': '#17a5ff',
-          'instagram': '#f7337d',
-          'twitch': '#654cff',
-          'discord': '#7289da',
-          'patreon': '#f75e49'
+          'facebook': '#3f74ee',
+          'twitter': '#2ab6ff',
+          'instagram': '#f4417f',
+          'twitch': '#9246ff',
+          'youtube': '#ff3d55',
+          'discord': '#7289d9',
         },
         info: '#23d2e2',
         danger: '#ff3d54',
         success: '#615dfa',
       },
       fontFamily: {
-        base: [ '"Rajdhani", sans-serif' ],
-        heading: [ '"Rajdhani", sans-serif' ]
+        base: [ '"Inter Variable", sans-serif' ],
+        heading: [ '"Inter Variable", sans-serif' ]
       },
       fontSize: {
         '3xs': '0.625rem',
         '2xs': '0.6875rem',
         '2sm': '0.8125rem',
-        'sm': ["0.875rem", "1.375rem"],
-        base: ["1rem", "2em"],
         '1.5xl': '1.375rem',
         '2.5xl': '1.6875rem',
         '3.5xl': '2.125rem',
         '5.5xl': '3.375rem',
-        '6.5xl': '4.25rem',
-        '9.5xl': '8.75rem',
-        '10.5xl': '10.625rem',
+        '6.5xl': '4.25rem'
       },
       letterSpacing: {
         tightest: '-0.06em'
@@ -79,50 +73,32 @@ export default {
       gap: {
         4.5: "1.125rem",
         5.5: "1.375rem",
-        // 6.5: "1.625rem",
         7.5: "1.875rem",
         12.5: "3.125rem",
-        // 15: "3.75rem",
-        // 25: "6.25rem",
       },
       margin: {
         4.5: "1.125rem",
         5.5: "1.375rem",
-        // 6.5: "1.625rem",
         7.5: "1.875rem",
         12.5: "3.125rem",
-        // 15: "3.75rem",
-        // 25: "6.25rem",
       },
       padding: {
         4.5: "1.125rem",
         5.5: "1.375rem",
-        // 6.5: "1.625rem",
         7.5: "1.875rem",
         12.5: "3.125rem",
-        // 15: "3.75rem",
-        // 25: "6.25rem",
       },
       inset: {
         4.5: "1.125rem",
         5.5: "1.375rem",
-        // 6.5: "1.625rem",
         7.5: "1.875rem",
         12.5: "3.125rem",
-        // 15: "3.75rem",
-        // 25: "6.25rem",
       },
       spacing: {
         4.5: "1.125rem",
         5.5: "1.375rem",
-        // 6.5: "1.625rem",
         7.5: "1.875rem",
         12.5: "3.125rem",
-        // 15: "3.75rem",
-        // 25: "6.25rem",
-      },
-      backgroundPosition: {
-        'spike-roll': '0px center, 8px center, 16px center, 24px center, 32px center, 40px center, 48px center, 56px center, 64px center'
       },
       boxShadow: {
         '3xl': '0 10px 60px 0 rgba(27, 27, 41, .06)'

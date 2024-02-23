@@ -1,0 +1,57 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import BaseSection from '@/components/BaseSection.astro';
+import Card from '@/components/Card.astro';
+import Filter from '@/components/Filter.astro';
+import { getI18N } from "@/i18n"
+import { getCosmetics } from '@/services/cosmetics.ts'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+const data = await getCosmetics({ lang: currentLocale, type: 'outfit' });
+
+let items = data.sort((a: any, b: any) => {
+  const dateA = a.releaseDate ? new Date(a.releaseDate) : null;
+  const dateB = b.releaseDate ? new Date(b.releaseDate) : null;
+
+  if (dateA === null && dateB === null) {
+    return 0;
+  }
+  if (dateA === null) {
+    return 1;
+  }
+  if (dateB === null) {
+    return -1;
+  }
+
+  return dateB.getTime() - dateA.getTime();
+});
+
+items = items.slice(0, 30);
+---
+<Layout 
+    title={i18n.COSMETICS.TITLE_SEO} 
+    description={i18n.COSMETICS.DESCRIPTION_SEO}
+>
+    <Filter/>
+    <BaseSection title={i18n.SECTIONS.COSMETICS}>
+        {
+            items.map(( item: any ) => {
+
+                const img = item.images.full_background === null 
+                    ? item.images.icon_background.replace('icon_background', 'background') 
+                    : item.images.icon_background;
+
+                return (
+                    <li>
+                        <Card 
+                            href={`/cosmetic/${item.id}`} 
+                            image={img} 
+                            title={item.name} 
+                        />
+                    </li>
+                )
+            })
+        }
+    </BaseSection>
+</Layout>

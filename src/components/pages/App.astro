@@ -3,10 +3,14 @@ import Layout from '@/layouts/Layout.astro';
 import Shop from '@/components/sections/Shop.astro';
 import Time from '@/components/sections/Time.astro';
 import Creative from '@/components/sections/Creative.astro';
+import { getI18N } from "@/i18n"
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
 ---
 
-<Layout title="Welcome to Ifornite.">
+<Layout title={i18n.HOME.TITLE_SEO} description={i18n.HOME.DESCRIPTION_SEO}>
     <Shop/>
-    <Time/>
-    <Creative title="Best of UEFN"/>
+    <Time title={i18n.HOME.COUNTER_TITLE} description={i18n.HOME.COUNTER_DESCRIPTION} />
+    <Creative title="Trending"/>
 </Layout>

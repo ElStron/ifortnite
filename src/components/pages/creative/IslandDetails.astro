@@ -1,0 +1,15 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+interface Props {
+    data:string[] | any;
+}
+const { data } = Astro.props;
+const island = data.island;
+---
+
+<Layout title='Creative'>
+    <h1>{island.title}</h1>
+    <p>{island.description}</p>
+    <img src={island.image} alt={island.title} />
+</Layout>

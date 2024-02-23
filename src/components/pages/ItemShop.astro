@@ -2,42 +2,119 @@
 import Section from '@/components/Section.astro';
 import Layout from '@/layouts/Layout.astro';
 import type { Shop, Item } from '@/models/shop.type.ts';
-import DailyShop from '@/data/shop.json';
+import { getDailyShop } from '@/services/dailyShop.ts'
+import { getI18N } from "@/i18n"
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
 
-const data = DailyShop as Shop | any;
+
+const data = await getDailyShop({ lang: currentLocale });
 const shop = data.shop as Item[];
 const sections: { id: string; name: string; }[] = [];
 
 for (const item of shop) {
-  const exists = sections.find((section) => section.name === item.section.name);
+  const exists = sections.find((section) => section.id === item.section.id);
   if (!exists) {
     sections.push({ id: item.section.id, name: item.section.name });
   }
 }
 
 ---
-<Layout title="Current Fortnite Item Shop">
+<Layout title={i18n.SHOP.TITLE_SEO} description={i18n.SHOP.DESCRIPTION_SEO}>
 
-  <section class="w-full mx-auto p-6" id="hero">
-    <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
-      Current
-      <strong class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Fortnite</strong>
-      Item Shop
+  <section class="w-full mx-auto p-6 text-balance" id="hero">
+    <h1 class="mb-2 text-xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-3xl" set:html={i18n.SHOP.TITLE}>
     </h1>
-
-    <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-      Check out the current item shop. New items are added every 24 hours. Discover new items and get exclusive offers.
-      Skins, bundles, emotes, cosmetics, and more. Last updated on <span class="font-bold">{data.lastUpdate.date}</span>
+    <p class="text-[16px] font-normal text-gray-500 dark:text-gray-400 text-pretty">
+      {i18n.SHOP.DESCRIPTION} <span class="font-bold">{data.lastUpdate.date}</span>
     </p>
   </section>
 
-  <section class="w-full mx-auto">
-    <div class="w-full p-6 flex flex-col gap-8">
+  <section class="w-full mx-auto max-h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar">
+    <div class="w-full p-6 flex flex-col gap-8 ">
       {
-        sections.map((section) => (
-          <Section id={section.id} name={section.name} shop={shop.filter((item) => item.section.name === section.name)} />
-        ))
+        sections.map((section) => {
+          const dataSection = shop.filter((item ) => item.section.id === section.id)
+          return (
+            <Section 
+              id={section.id} 
+              shop={dataSection}
+              name={section.name} 
+            />
+          )
+        })
       }
     </div>
   </section>
 </Layout>
+
+<style is:inline>
+  h1>strong {
+    background: -webkit-linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-color: #00DBDE;
+    background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+        width: auto;
+        height: 10px;
+        background: #1b1d25;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #f3f4f61a;
+        border-radius: 2px;
+        border: 3px solid #1b1d25;
+        background-clip: content-box;
+        min-height: 40px;
+        min-width: 40px;
+        margin: 3px;
+
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #f3f4f6;
+    }
+    h2 {
+    display: block;
+    line-height: 1.5; 
+    }
+
+    h2 {
+    view-timeline-name: --h2;
+    view-timeline-axis: block;
+    animation-timeline: var(--h2);
+    animation-name: h2FadeIn;
+    animation-duration: 1s; /* Adjust timing as desired */
+    animation-fill-mode: forwards; /* Prevent flickering on repeat */
+    }
+
+    @keyframes h2FadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(50px); /* Optional vertical offset for effect */
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    img {
+        view-timeline-name: --image;
+        view-timeline-axis: block;
+        animation-timeline: --image;
+        animation-name: mymove;
+        animation-range: entry 15% cover 30%;
+        animation-fill-mode: both;
+    }
+    @keyframes mymove {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+</style>

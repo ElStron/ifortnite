@@ -1,36 +1,6 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import BaseSection from '@/components/BaseSection.astro';
-import IslandCard from '@/components/IslandCard.astro';
+import Creative from "@/components/pages/creative/Creative.astro";
 export const prerender = true;
-
-const response = await fetch('https://race.f1calendar.live/creative')
-const data = await response.json();
-const sections = data;
 ---
 
-<Layout title='Creative'>
-    {
-        sections.map((section: any) => {
-    
-                return (
-                    section.islands.length > 0 &&
-                    <BaseSection title={section.category.label}>
-                        {
-                            section.islands.map((island: any) => {
-                                return (
-                                    <li>
-                                        <a href={`/creative/${island.islandCode}`}>
-                                            <IslandCard code={island.islandCode} image={island.imgSrc} title={island.title} />
-                                        </a>
-                                    </li>
-                                )
-                            })
-                        }
-                    </BaseSection>
-                )
-            
-        })
-    }
-    
-</Layout>
+<Creative />

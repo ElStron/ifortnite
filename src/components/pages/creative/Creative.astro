@@ -2,34 +2,33 @@
 import Layout from '@/layouts/Layout.astro';
 import BaseSection from '@/components/BaseSection.astro';
 import IslandCard from '@/components/IslandCard.astro';
+import IslandSections from '@/components/IslandSections.tsx';
+import { getI18N } from "@/i18n"
+import { getCreative } from '@/services/creative.ts'
 
-const response = await fetch('https://race.f1calendar.live/creative')
-const data = await response.json();
-const sections = data;
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+const lang = currentLocale as string
+const sections = await getCreative({lang: currentLocale});
 ---
 
-<Layout title='Creative'>
-    {
-        sections.map((section: any) => {
-    
+<Layout title={i18n.CREATIVE.TITLE_SEO} description={i18n.CREATIVE.DESCRIPTION_SEO}>
+    <BaseSection 
+                    title={sections[1].category.label}
+                >
+        {
+            sections[1].islands.map((island: any) => {
                 return (
-                    section.islands.length > 0 &&
-                    <BaseSection title={section.category.label}>
-                        {
-                            section.islands.map((island: any) => {
-                                return (
-                                    <li>
-                                        <a href={`/creative/${island.islandCode}`}>
-                                            <IslandCard code={island.islandCode} image={island.imgSrc} title={island.title} />
-                                        </a>
-                                    </li>
-                                )
-                            })
-                        }
-                    </BaseSection>
+                    <li>
+                        <IslandCard 
+                            code={island.islandCode} 
+                            image={island.imgSrc} 
+                            title={island.title}
+                        />
+                    </li>
                 )
-            
-        })
-    }
-    
+            })
+        }
+    </BaseSection>
+    <IslandSections lang={lang} page={2} client:load />
 </Layout>

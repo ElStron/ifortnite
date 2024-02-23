@@ -12,9 +12,13 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^8.1.0",
+    "@astrojs/preact": "^3.1.0",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vercel": "^6.1.4",
+    "@fontsource-variable/inter": "^5.0.16",
+    "@supabase/supabase-js": "^2.39.3",
     "astro": "^4.1.2",
+    "preact": "^10.19.4",
     "tailwindcss": "^3.4.1"
   }
 }

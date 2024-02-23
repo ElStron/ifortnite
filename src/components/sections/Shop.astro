@@ -1,22 +1,33 @@
 ---
 import BaseSection from "@/components/BaseSection.astro";
----
+import { API_URLS, URL_IMG } from "@/constants.ts";
+import Card from "@/components/Card.astro";
 
-<BaseSection title="Shop">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-</BaseSection>
-<style>
-    li {
-        background-color: tomato;
-        width: 100%;
-        height: 180px;
-        border-radius: 10px;
+const { currentLocale } = Astro
+
+const response = await fetch(API_URLS.SHOP+'?lang='+currentLocale, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': import.meta.env.API_KEY
     }
-</style>
+})
+const data = await response.json();
+const items = data.shop.filter((item: any) => item.mainType === 'outfit');
+---
+<BaseSection title="Shop">
+    {
+        items &&
+        items.map((item: any) => {
+            return (
+                <li>
+                    <Card 
+                        href={`/cosmetic/${item.mainId}`} 
+                        image={URL_IMG(item.displayAssets[0].materialInstance.toLowerCase())} 
+                        title={item.displayName} 
+                    />
+                </li>
+            )
+        })
+    }
+</BaseSection>

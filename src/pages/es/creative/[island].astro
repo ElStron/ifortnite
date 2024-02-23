@@ -1,23 +1,13 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import { API_URLS } from '@/constants.ts';
+import IslandDetails from '@/components/pages/creative/IslandDetails.astro';
+import { getIsland } from '@/services/islands.ts'
 export const prerender = false;
 
-const url = API_URLS.ISLAND + Astro.params.island + '&lang=es';
-const response = await fetch(API_URLS.ISLAND + Astro.params.island, {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': import.meta.env.API_KEY
-    }
-})
-
-const data = await response.json();
-const island = data.island;
+const { currentLocale } = Astro
+const code = Astro.params.island as string;
+const data = await getIsland({ code: code, lang: currentLocale })
+if (data.code === 'INVALID_CODE') {
+    return Astro.redirect('/404', 301);
+}
 ---
-
-<Layout title='Creative'>
-    <h1>{island.title}</h1>
-    <p>{island.description}</p>
-    <img src={island.image} alt={island.title} />
-</Layout>
+<IslandDetails data={data} />

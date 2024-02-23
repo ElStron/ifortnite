@@ -1,0 +1,52 @@
+<button type="button" aria-label="menu">
+    <div></div>
+    <div></div>
+    <div></div>
+</button>
+
+<style>
+    button {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 2.4rem;
+        height: 2rem;
+        border: 0;
+        background: transparent;
+        gap: 0.6rem;
+    }
+    button > div {
+        background: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 0.25rem;
+        transition: all 0.3s ease;
+        transform-origin: left;
+    }
+    input {
+        opacity: 1;
+    }
+    .active div:first-child {
+        width: 100%;
+        transform: rotate(45deg);
+    }
+    .active div:nth-child(2) { 
+        opacity: 0;
+    }
+    .active div:last-child{
+        width: 100%;
+        transform: rotate(-45deg);
+    }
+</style>
+<script is:inline>
+
+
+    const nav = document.querySelector('nav');
+    const btn = document.querySelector('button[aria-label="menu"]');
+
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+        nav.classList.toggle('hidden');
+    });
+
+</script>
