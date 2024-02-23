@@ -10,9 +10,7 @@ export default defineConfig({
     applyBaseStyles: true
   }), preact()],
   output: "server",
-  adapter: cloudflare({
-    mode: "directory"
-  }),
+  adapter: cloudflare(),
   i18n: {
     defaultLocale: "en",
     locales: ["en", "es"],
