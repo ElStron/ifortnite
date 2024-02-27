@@ -9,10 +9,10 @@ const { currentLocale } = Astro
         Object.keys(languages).map((key: string) => {
 
             const selected: boolean = key === currentLocale;
-
+            const lenguage = languages[key as keyof typeof languages];
             return (
                 <option value={key} {selected} class="bg-gray-800"> 
-                    {languages[key as keyof typeof languages] }
+                    { lenguage }
                 </option> 
             )
         })
@@ -30,14 +30,13 @@ const { currentLocale } = Astro
         const value = e.target.value;
         const currentLocation = window.location.pathname;
 
-        console.log(currentLocale, value)
-        if (currentLocale === value) return
+        if (currentLocale === value){ return }
 
         let newLocation = value === 'en' 
             ? `${currentLocation.substring(3)}` 
             : `/${value}${currentLocation}`;
 
-        window.location.pathname = `${newLocation}`
+        window.location.pathname = `${newLocation}`;
 
     });
 </script>

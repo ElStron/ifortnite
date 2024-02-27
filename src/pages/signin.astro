@@ -14,14 +14,12 @@ if (accessToken && refreshToken) {
 <Layout title="Sign in">
   <h1>Sign in</h1>
   <p>New here? <a href="/register">Create an account</a></p>
-  <form action="/api/auth/signin" method="post">
+  <form action="/api/auth/signin" method="post" class="flex flex-col">
     <label for="email" for="email">Email</label>
     <input type="email" name="email" id="email" />
     <label for="password">Password</label>
     <input type="password" name="password" id="password" />
     <button type="submit">Login</button>
-    <button value="google" name="provider" type="submit">Sign in with Google</button>
     <button value="discord" name="provider" type="submit">Sign in with Discord</button>
-    <button value="twitter" name="provider" type="submit">Sign in with X</button>
   </form>
 </Layout>
