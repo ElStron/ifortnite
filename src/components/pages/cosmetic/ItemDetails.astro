@@ -30,7 +30,7 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
         <section id="hero" class="w-full flex justify-between relative">
             {
                 data.type.name !==  "Jam Track" ?
-                <img id="item" src={image} alt={data.name} />
+                <img id="item" src={image} alt={data.name} loading="lazy" class="tinDownIn" />
                 : <Vynil img={image}/> 
             }
         </section>
@@ -93,6 +93,13 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
         max-height: 100%;
         max-width: 100%;
     }
+    #hero img {
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        aspect-ratio: 700 / 580;
+    }
     #components {
         grid-area: c;
         scrollbar-color: #f3f4f61a rgb(27 29 37 / 17%);
@@ -122,4 +129,56 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
         mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
         }
     }
+    .tinDownIn {
+        -webkit-animation-name: tinDownIn;
+        animation-name: tinDownIn;
+    }
+    @-webkit-keyframes tinDownIn {
+        0% {
+            opacity: 0;
+            -webkit-transform: scale(1, 1) translateY(900%);
+            transform: scale(1, 1) translateY(900%);
+        }
+
+        50%,
+        70%,
+        90% {
+            opacity: 1;
+            -webkit-transform: scale(1.1, 1.1) translateY(0);
+            transform: scale(1.1, 1.1) translateY(0);
+        }
+
+        60%,
+        80%,
+        100% {
+            opacity: 1;
+            -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0);
+        }
+    }
+    @keyframes tinDownIn {
+        0% {
+            opacity: 0;
+            -webkit-transform: scale(1, 1) translateY(900%);
+            transform: scale(1, 1) translateY(900%);
+        }
+
+        50%,
+        70%,
+        90% {
+            opacity: 1;
+            -webkit-transform: scale(1.1, 1.1) translateY(0);
+            transform: scale(1.1, 1.1) translateY(0);
+        }
+
+        60%,
+        80%,
+        100% {
+            opacity: 1;
+            -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0);
+        }
+    }
+
 </style>
+
