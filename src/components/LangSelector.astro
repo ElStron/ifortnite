@@ -4,7 +4,7 @@ const { currentLocale } = Astro
 
 ---
 
-<select name="lang" id="langSelector" data-locale={currentLocale} class="text-white text-sm font-bold bg-transparent">
+<select name="lang" id="langSelector" aria-label="Change language" data-locale={currentLocale} class="text-white text-sm font-bold bg-transparent">
     {
         Object.keys(languages).map((key: string) => {
 
