@@ -29,9 +29,15 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
         </section>
         <section id="hero" class="w-full flex justify-between relative">
             {
-                data.type.name !==  "Jam Track" ?
-                <img id="item" src={image} alt={data.name} loading="lazy" class="tinDownIn" />
-                : <Vynil img={image}/> 
+                data.type.name !==  "Jam Track" 
+                ?   <img 
+                        id="item" 
+                        src={image} 
+                        alt={data.name} 
+                        loading="lazy" 
+                        class="aspect-[360/360] sm:aspect-[480/480] lg:aspect-[720/720]" 
+                    />
+                :   <Vynil img={image}/> 
             }
         </section>
         <section id="components" class="w-full h-full flex flex-col gap-4 lg:pb-8 overflow-x-auto lg:overflow-x-visible relative">
@@ -42,7 +48,10 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
                 {
                     grants && grants.map((grant: any) => {
                         return (
-                            <Link href={`/cosmetic/${grant.id}`} class="w-[100px] h-[100px] flex-none">
+                            <Link 
+                                href={`/cosmetic/${grant.id}`} 
+                                class="w-[100px] h-[100px] flex-none"
+                            >
                                 <img
                                     class="w-full h-full object-cover rounded-lg shadow-lg bg-[rgba(0,0,0,0.2)] cursor-pointer hover:scale-110 transition-all" 
                                     src={grant.images.icon}
@@ -92,7 +101,6 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
         height: 700px;
         max-height: 100%;
         max-width: 100%;
-        aspect-ratio: 700 / 580;
     }
     #hero img {
         -webkit-animation-duration: 1s;
@@ -120,63 +128,11 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
         #hero {
             width: 100%;
             height: 100%;
-            aspect-ratio: 360 / 360;
         }
         #item {
             -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
         mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
         }
     }
-    .tinDownIn {
-        -webkit-animation-name: tinDownIn;
-        animation-name: tinDownIn;
-    }
-    @-webkit-keyframes tinDownIn {
-        0% {
-            opacity: 0;
-            -webkit-transform: scale(1, 1) translateY(900%);
-            transform: scale(1, 1) translateY(900%);
-        }
-
-        50%,
-        70%,
-        90% {
-            opacity: 1;
-            -webkit-transform: scale(1.1, 1.1) translateY(0);
-            transform: scale(1.1, 1.1) translateY(0);
-        }
-
-        60%,
-        80%,
-        100% {
-            opacity: 1;
-            -webkit-transform: scale(1, 1) translateY(0);
-            transform: scale(1, 1) translateY(0);
-        }
-    }
-    @keyframes tinDownIn {
-        0% {
-            opacity: 0;
-            -webkit-transform: scale(1, 1) translateY(900%);
-            transform: scale(1, 1) translateY(900%);
-        }
-
-        50%,
-        70%,
-        90% {
-            opacity: 1;
-            -webkit-transform: scale(1.1, 1.1) translateY(0);
-            transform: scale(1.1, 1.1) translateY(0);
-        }
-
-        60%,
-        80%,
-        100% {
-            opacity: 1;
-            -webkit-transform: scale(1, 1) translateY(0);
-            transform: scale(1, 1) translateY(0);
-        }
-    }
-
 </style>
 
