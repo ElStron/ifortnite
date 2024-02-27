@@ -1,0 +1,43 @@
+---
+import { languages } from '@/i18n/ui.ts';
+const { currentLocale } = Astro
+
+---
+
+<select name="lang" id="langSelector" data-locale={currentLocale} class="text-white text-sm font-bold bg-transparent">
+    {
+        Object.keys(languages).map((key: string) => {
+
+            const selected: boolean = key === currentLocale;
+
+            return (
+                <option value={key} {selected} class="bg-gray-800"> 
+                    {languages[key as keyof typeof languages] }
+                </option> 
+            )
+        })
+    }
+</select>
+
+<script is:inline>
+
+    const select = document.querySelector('#langSelector');
+    const currentLocale = select.getAttribute('data-locale');
+
+    select.addEventListener('change', (e) => {
+
+        e.preventDefault();
+        const value = e.target.value;
+        const currentLocation = window.location.pathname;
+
+        console.log(currentLocale, value)
+        if (currentLocale === value) return
+
+        let newLocation = value === 'en' 
+            ? `${currentLocation.substring(3)}` 
+            : `/${value}${currentLocation}`;
+
+        window.location.pathname = `${newLocation}`
+
+    });
+</script>
