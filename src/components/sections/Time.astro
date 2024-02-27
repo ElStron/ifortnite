@@ -7,21 +7,12 @@ const { title, description } = Astro.props;
 const url = 'https://media.fortniteapi.io/images/displayAssets/v2/BattleRoyale/DAv2_Sparks_Keytar_Wafer/MI_Sparks_Keytar_Wafer.png'
 ---
 
-<section class="w-full mx-auto flex items-center justify-around">
-    <picture class="max-w-[200px] w-full bg-slate-200 rounded-full">
-        <img src={url} alt="time" class="w-full" />
-    </picture>
-    <div class="timer w-full max-h-[120px] bg-sky-700 rounded-r-full flex items-center justify-between">
-        <div class="w-full p-6">
-            <h2 class="text-lg font-bold text-white my-4">
-                {title}
-            </h2>
-            <p class="text-lg font-normal text-white">
-                {description}
-            </p>
-        </div> 
-        <div class="w-full p-6 max-w-[100%] md:max-w-[30%]">
-            <strong class="w-full text-5xl font-bold text-white">00:00:00</strong>
-        </div>
+<section
+    class="overflow-visible relative max-w-sm mx-auto lg:max-w-none bg-white shadow-lg ring-1 ring-black/5 rounded-xl flex items-center gap-6 dark:bg-slate-800 dark:highlight-white/5">
+    <img class="absolute -left-6 w-24 h-24 rounded-full shadow-lg" src={url} alt="time" width="96" height="96" loading="lazy">
+    <div class="flex flex-col py-5 pl-24">
+        <h2 class="text-slate-900 text-lg font-medium dark:text-slate-200">{title}</h2>
+        <strong class="text-slate-900 text-sm font-medium dark:text-slate-200">{description}</strong>
+        <span class="text-slate-500 text-sm font-medium dark:text-slate-400">00:00:00</span>
     </div>
 </section>
