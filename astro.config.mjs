@@ -6,9 +6,7 @@ import preact from "@astrojs/preact";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ifornite.com',
-  trailingSlash: 'never',
   build: {
-    format: 'file',
     assets: '_assets',
   },
   integrations: [tailwind({
