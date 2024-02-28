@@ -7,6 +7,7 @@ import preact from "@astrojs/preact";
 export default defineConfig({
   site: 'https://ifornite.com',
   build: {
+    format: 'file',
     assets: '_assets',
   },
   integrations: [tailwind({
