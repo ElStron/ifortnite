@@ -14,6 +14,6 @@ export const bundlesList = ( { lang }:{ lang: string }) => `${ENDPOINTS.v2}/bund
 
 export const itemDetails = ( { id, lang }:{ id: string, lang: string }) => `${ENDPOINTS.v2}/items/get?id=${id}&lang=${lang}`
 
-export const creativeList = ( { lang }:{ lang: string }) => `${ENDPOINTS.v4}/creative/?lang=${lang}`
+export const creativeList = ( { lang }:{ lang: string }) => `${ENDPOINTS.v4}/creative?lang=${lang}`
 
 export const islandDetails = ( { code, lang }:{ code: string, lang: string }) => `${ENDPOINTS.v1}/creative/island?code=${code}&lang=${lang}`

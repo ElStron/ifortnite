@@ -1,24 +1,16 @@
 ---
 import BaseSection from "@/components/BaseSection.astro";
 import IslandCard from '@/components/IslandCard.astro';
-import { getI18N } from "@/i18n"
 import { getCreative } from '@/services/creative.ts'
 
 const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
 
-interface Props {
-    title: string;
-    
-}
-const { title } = Astro.props;
 const data = await getCreative({lang: currentLocale});
-const section = data.find((section: any) => section.category.label === title)
-
+const FIRST_ISLAND = 1
 ---
-<BaseSection title={section.category.label}>
+<BaseSection title={data[FIRST_ISLAND].category.label}>
     {
-        section.islands.map((island: any) => {
+        data[FIRST_ISLAND].islands.map((island: any) => {
             return (
                 <li>
                     <a href={`/creative/${island.islandCode}`}>
