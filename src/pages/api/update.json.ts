@@ -1,8 +1,20 @@
-import type { APIRoute } from 'astro';
+import type { APIRoute } from 'astro'; 
 
 export const POST: APIRoute = async ({ request }) => {
-    const response = await fetch( 'https://api.vercel.com/v1/integrations/deploy/prj_xGNgyuZ9nCEW9YzRZTH7f5aepPjz/NihVGOB8wY' );  
-    const data = await response.json();
-    return new Response(JSON.stringify(data)
+    
+    const CF_UPDATE_URL = import.meta.env.CF_UPDATE_URL
+    const IF_UPDATE_URL = import.meta.env.IF_UPDATE_URL
+
+    await fetch( CF_UPDATE_URL, {
+        method: 'POST',
+    });  
+
+    await fetch(IF_UPDATE_URL, {
+        method: 'POST'
+    })
+
+    return new Response(
+        
+        JSON.stringify({ message: 'success' }),
     )
 }
