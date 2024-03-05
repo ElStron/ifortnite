@@ -8,7 +8,7 @@ const data = await getDailyShop({ lang: currentLocale, filter: 'section' });
 const items = data[sectionNumber].items
 ---
 <BaseSection title={data[sectionNumber].name}>
-    <ol class="mx-auto h-[250px] md:h-[370px] max-h-full grid grid-rows-2 gap-4 grid-flow-col p-4 w-full auto-cols-[100px] md:auto-cols-[200px] pl-0 lg:overflow-x-auto">
+    <ol class="mx-auto h-[250px] md:h-[370px] max-h-full grid grid-rows-2 gap-4 grid-flow-col p-4 w-full auto-cols-[100px] md:auto-cols-[200px] pl-0 overflow-x-auto lg:overflow-x-visible">
         {
             items.map((item: any) => (
                 <ItemSection item={item}/>
