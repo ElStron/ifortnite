@@ -1,18 +1,19 @@
 ---
 import BaseSection from "@/components/BaseSection.astro";
 import ItemSection from '@/components/ItemSection.astro';
-import { getDailyShop } from '@/services/dailyShop.ts'
+import { getDailyShop } from '@/services/dailyShop.ts';
+
 const { currentLocale } = Astro
 const sectionNumber = 2
 const data = await getDailyShop({ lang: currentLocale, filter: 'section' });
+
 const items = data[sectionNumber].items
+const classStyles = "w-full h-full grid grid-rows-2 gap-4 grid-flow-col p-4 w-full auto-cols-[100px] md:auto-cols-[200px] pl-0 overflow-x-auto lg:overflow-x-visible"
 ---
-<BaseSection title={data[sectionNumber].name}>
-    <ol class="mx-auto h-[250px] md:h-[370px] max-h-full grid grid-rows-2 gap-4 grid-flow-col p-4 w-full auto-cols-[100px] md:auto-cols-[200px] pl-0 overflow-x-auto lg:overflow-x-visible">
-        {
-            items.map((item: any) => (
-                <ItemSection item={item}/>
-            ))
-        }
-    </ol> 
+<BaseSection title={data[sectionNumber].name} class:list={[classStyles]}>
+    {
+        items.map((item: any) => (
+            <ItemSection item={item}/>
+        ))
+    }
 </BaseSection>
