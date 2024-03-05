@@ -1,24 +1,15 @@
 ---
 import Section from '@/components/Section.astro';
 import Layout from '@/layouts/Layout.astro';
-import type { Shop, Item } from '@/models/shop.type.ts';
-import { getDailyShop } from '@/services/dailyShop.ts'
+import type { Item } from '@/models/shop.type.ts';
+import { getDailyShop, filterItemsBySection } from '@/services/dailyShop.ts'
 import { getI18N } from "@/i18n"
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 
 
 const data = await getDailyShop({ lang: currentLocale });
-const shop = data.shop as Item[];
-const sections: { id: string; name: string; }[] = [];
-
-for (const item of shop) {
-  const exists = sections.find((section) => section.id === item.section.id);
-  if (!exists) {
-    sections.push({ id: item.section.id, name: item.section.name });
-  }
-}
-
+const sections = filterItemsBySection(data.shop);
 ---
 <Layout title={i18n.SHOP.TITLE_SEO} description={i18n.SHOP.DESCRIPTION_SEO}>
 
@@ -30,13 +21,14 @@ for (const item of shop) {
     </p>
   </section>
 
-  <section class="w-full mx-auto max-h-[550px] overflow-y-auto overflow-x-hidden custom-scrollbar">
+  <section class="w-full mx-auto custom-scrollbar">
     <div class="w-full p-6 flex flex-col gap-8 ">
       {
         sections.map((section) => {
-          const dataSection = shop.filter((item ) => item.section.id === section.id)
+          const dataSection = section.items as Item[]
           return (
-            <Section 
+            <Section
+              priority={section.price} 
               id={section.id} 
               shop={dataSection}
               name={section.name} 
