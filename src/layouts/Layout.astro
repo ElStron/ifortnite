@@ -23,7 +23,7 @@ const { currentLocale } = Astro
 
 		<div id="site-wrapper" class="max-w-[1420px] mx-auto min-h-[100svh] flex flex-col js-site-wrapper">
 			<Header/>
-			<main id="main-content" class="grow lg:pt-0 mt-10 flex flex-col gap-y-10 px-4">
+			<main id="main-content" class="grow lg:pt-0 mt-10 flex flex-col gap-y-4 lg:gap-y-10 px-4">
 				<slot />
 			</main>
 			<Footer/>
@@ -31,3 +31,9 @@ const { currentLocale } = Astro
 		
 	</body>
 </html>
+<style is:global>
+	ol {
+        scrollbar-width: thin;
+        scrollbar-color: #ffffff3d #4d4e520d;
+    }
+</style>
