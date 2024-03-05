@@ -5,21 +5,42 @@ interface Props {
     item: Item;
 }
 const { item } = Astro.props;
-const bundle = item.displayName.toLowerCase().includes("bundle") ? "row-span-2 col-span-2" :
-               item.displayType === 'Outfit' ? "row-span-2 col-span-1" :
-               "row-span-1 col-span-1";  // Valor por defecto si ninguna condición se cumple
+const displayNameLower = item.displayName.toLowerCase();
+const isBundleOrLote = displayNameLower.includes("bundle") || displayNameLower.includes("lote");
+const isOutfit = item.displayType === "Outfit" || item.displayType === "Traje";
+
+const bundle = isBundleOrLote ? "row-span-2 col-span-2" :
+               isOutfit ? "row-span-2 col-span-1" :
+               "row-span-1 col-span-1";
 
 const granted = item.granted.map((granted) => granted.images.background).join(', ');
 ---
 
-<li class={`${bundle} rounded-lg`} >
-    <Link href={`/cosmetic/${item.mainId}`}>
+<li class={`${bundle} rounded-lg relative hover:scale-105 hover:ring-2 hover:ring-white transition-all`} >
+    <Link href={`/cosmetic/${item.mainId}`} class={`w-full h-full`}>
         <img 
-            class="h-full object-cover rounded-lg hover:scale-105 hover:ring-2 hover:ring-white transition-all" 
+            class="w-full h-full object-cover object-top rounded-lg" 
             src={item.displayAssets[0].background} 
             alt={item.displayName} 
             data-imgs={granted} 
             loading="lazy"
         />
+        <span class="flex flex-col text-slate-900 text-sm font-medium dark:text-slate-200 absolute bottom-2 left-2">
+            <h3>{item.displayName}</h3>
+            <span>
+                <span class="bg-white text-slate-900 font-bold px-1 rounded-full max-w-[max-content] text-opacity-75">V</span>
+                <strong class="">{item.price.finalPrice}</strong>
+                {
+                    item.price.finalPrice < item.price.regularPrice && 
+                    <span class="text-gray-400 line-through">{item.price.regularPrice}</span>
+                }
+            </span>
+        </span>
+        {
+            item.banner && 
+            <span class="text-sm font-nomal text-black bg-yellow-400 m-2 px-2 py-1 rounded-sm absolute top-0 left-0">
+                {item.banner.name}
+            </span>
+        }
     </Link>
 </li>
