@@ -1,33 +1,18 @@
 ---
 import BaseSection from "@/components/BaseSection.astro";
-import { API_URLS, URL_IMG } from "@/constants.ts";
-import Card from "@/components/Card.astro";
-
+import ItemSection from '@/components/ItemSection.astro';
+import { getDailyShop } from '@/services/dailyShop.ts'
 const { currentLocale } = Astro
-
-const response = await fetch(API_URLS.SHOP+'?lang='+currentLocale, {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': import.meta.env.API_KEY
-    }
-})
-const data = await response.json();
-const items = data.shop.filter((item: any) => item.mainType === 'outfit');
+const sectionNumber = 2
+const data = await getDailyShop({ lang: currentLocale, filter: 'section' });
+const items = data[sectionNumber].items
 ---
-<BaseSection title="Shop">
-    {
-        items &&
-        items.map((item: any) => {
-            return (
-                <li>
-                    <Card 
-                        href={`/cosmetic/${item.mainId}`} 
-                        image={URL_IMG(item.displayAssets[0].materialInstance.toLowerCase())} 
-                        title={item.displayName} 
-                    />
-                </li>
-            )
-        })
-    }
+<BaseSection title={data[sectionNumber].name}>
+    <ol class="mx-auto h-[370px] max-h-full grid grid-rows-2 gap-4 grid-flow-col p-4 w-full auto-cols-[100px] md:auto-cols-[200px] pl-0">
+        {
+            items.map((item: any) => (
+                <ItemSection item={item}/>
+            ))
+        }
+    </ol> 
 </BaseSection>
