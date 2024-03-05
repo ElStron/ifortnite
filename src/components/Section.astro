@@ -5,6 +5,7 @@ import ItemSection from "@/components/ItemSection.astro";
 interface Props {
     name: string;
     id: string;
+    priority: number;
     shop: Item[];
 }
 
@@ -14,7 +15,7 @@ shop.sort((a,b) => b.price.regularPrice - a.price.regularPrice)
 
 <article class="w-full" id={id}>
     <h2 class="text-lg font-black text-gray-900 dark:text-white my-4 italic uppercase">{name}</h2>
-    <ol class="mx-auto h-[370px] max-h-full grid grid-rows-2 gap-x-2 gap-y-8 grid-flow-col p-4 w-full auto-cols-[100px] md:auto-cols-[200px] pl-0">
+    <ol class="mx-auto h-[370px] max-h-full grid grid-rows-2 gap-4 grid-flow-col p-4 w-full auto-cols-[100px] md:auto-cols-[200px] pl-0">
         {
             shop.map((item) => (
                 <ItemSection item={item}/>
