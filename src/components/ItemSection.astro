@@ -1,6 +1,8 @@
 ---
 import type { Item } from "@/models/shop.type.ts";
 import Link from "@/components/Link.astro";
+import { HOVER } from "@/constants";
+
 interface Props {
     item: Item;
 }
@@ -16,7 +18,7 @@ const bundle = isBundleOrLote ? "row-span-2 col-span-2" :
 const granted = item.granted.map((granted) => granted.images.background).join(', ');
 ---
 
-<li class={`${bundle} rounded-lg relative hover:scale-105 hover:ring-2 hover:ring-white transition-all`} >
+<li class={`${bundle} rounded-lg relative ${HOVER}`} >
     <Link href={`/cosmetic/${item.mainId}`} class={`w-full h-full`}>
         <img 
             class="w-full h-full object-cover object-top rounded-lg" 
