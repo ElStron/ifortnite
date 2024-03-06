@@ -5,11 +5,11 @@ export const POST: APIRoute = async ({ request }) => {
     const CF_UPDATE_URL = import.meta.env.CF_UPDATE_URL
     const IF_UPDATE_URL = import.meta.env.IF_UPDATE_URL
 
-    await fetch( CF_UPDATE_URL, {
+    fetch( CF_UPDATE_URL, {
         method: 'POST',
     });  
 
-    await fetch(IF_UPDATE_URL, {
+    fetch(IF_UPDATE_URL, {
         method: 'POST'
     })
 
