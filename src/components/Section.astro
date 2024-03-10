@@ -5,7 +5,7 @@ import ItemSection from "@/components/ItemSection.astro";
 interface Props {
     name: string;
     id: string;
-    priority: number;
+    priority?: number;
     shop: Item[];
 }
 
@@ -18,7 +18,8 @@ shop.sort((a,b) => b.price.regularPrice - a.price.regularPrice)
     <ol class="mx-auto h-[250px] md:h-[370px] max-h-full grid grid-rows-2 gap-4 grid-flow-col p-4 w-full auto-cols-[100px] md:auto-cols-[200px] pl-3 overflow-x-auto">
         {
             shop.map((item) => (
-                <ItemSection item={item}/>
+                
+                item.mainId && <ItemSection item={item}/>
             ))
         }
     </ol> 
