@@ -7,10 +7,7 @@ interface Props {
     item: Item;
 }
 const { item } = Astro.props;
-const displayNameLower = item.displayName;
-if (!displayNameLower) {
-    console.error("No displayName", item);
-}
+const displayNameLower = item.displayName.toLowerCase();
 const isBundleOrLote = displayNameLower.includes("bundle") || displayNameLower.includes("lote");
 const isOutfit = item.displayType === "Outfit" || item.displayType === "Traje";
 
