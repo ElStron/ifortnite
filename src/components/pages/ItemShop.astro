@@ -48,50 +48,11 @@ const sections = filterItemsBySection(data.shop);
     background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
 
   }
-  .custom-scrollbar::-webkit-scrollbar {
-        width: auto;
-        height: 10px;
-        background: #1b1d25;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #f3f4f61a;
-        border-radius: 2px;
-        border: 3px solid #1b1d25;
-        background-clip: content-box;
-        min-height: 40px;
-        min-width: 40px;
-        margin: 3px;
-
-    }
-
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background: #f3f4f6;
-    }
     h2 {
     display: block;
     line-height: 1.5; 
     }
-
-    h2 {
-    view-timeline-name: --h2;
-    view-timeline-axis: block;
-    animation-timeline: var(--h2);
-    animation-name: h2FadeIn;
-    animation-duration: 1s; /* Adjust timing as desired */
-    animation-fill-mode: forwards; /* Prevent flickering on repeat */
-    }
-
-    @keyframes h2FadeIn {
-        0% {
-            opacity: 0;
-            transform: translateY(50px); /* Optional vertical offset for effect */
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+  
     article {
         view-timeline-name: --image;
         view-timeline-axis: block;
@@ -109,3 +70,28 @@ const sections = filterItemsBySection(data.shop);
         }
     }
 </style>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const imgs = document.querySelectorAll('[data-imgs]');
+    const imgExists = {};
+
+    const randomImg = (images) => {
+      const imagesArray = images.split(',');
+      const img = imagesArray[Math.floor(Math.random() * imagesArray.length)];
+      return img;
+    }
+
+    const updateImg = () => {
+      imgs.forEach((img) => {
+        const getImg = randomImg(img.getAttribute('data-imgs'));
+
+        if (!imgExists[getImg]) {
+          img.setAttribute('src', getImg);
+          imgExists[getImg] = true;
+        }
+      });
+    }
+
+    setInterval(updateImg, 1000);
+  });
+</script>
