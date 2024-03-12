@@ -6,8 +6,9 @@ interface Props {
     title: string;
     priority?:'high' | 'low' | 'auto';
     granted?: string[];
+    hide?: boolean
 }
-const { href, image, title, priority = 'low', granted } = Astro.props;
+const { href, image, title, priority = 'low', granted, hide = false } = Astro.props;
 ---
 <Link href={href}>
     <article class="w-full relative">
@@ -20,7 +21,8 @@ const { href, image, title, priority = 'low', granted } = Astro.props;
                     loading="lazy" 
                     width="100%" 
                     height="100%" 
-                    fetchpriority={priority} 
+                    fetchpriority={priority}
+                    hidden={hide} 
                 />
             </picture>
         </header>
