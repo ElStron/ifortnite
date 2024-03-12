@@ -44,8 +44,7 @@ export const getDailyShop = async ( {
     lang: string | undefined, 
     type?: string | undefined
 }) => {
+
     let data = await fetchData(dailyShop({ lang: lang }))
-    
-    
     return data
 }
