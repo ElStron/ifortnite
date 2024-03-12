@@ -4,11 +4,11 @@ import BaseSection from '@/components/BaseSection.astro';
 import Card from '@/components/Card.astro';
 import Filter from '@/components/Filter.astro';
 import { getI18N } from "@/i18n"
-import { getCosmetics } from '@/services/cosmetics.ts'
+import { getCosmetics, filterItemsByType } from '@/services/cosmetics.ts'
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
-const data = await getCosmetics({ lang: currentLocale, type: 'outfit' });
+const data = await getCosmetics({ lang: currentLocale });
 
 let items = data.sort((a: any, b: any) => {
   const dateA = a.releaseDate ? new Date(a.releaseDate) : null;
@@ -27,7 +27,7 @@ let items = data.sort((a: any, b: any) => {
   return dateB.getTime() - dateA.getTime();
 });
 
-items = items.slice(0, 30);
+items = filterItemsByType('outfit', items).slice(0, 20);
 ---
 <Layout 
     title={i18n.COSMETICS.TITLE_SEO} 
@@ -38,16 +38,13 @@ items = items.slice(0, 30);
         {
             items.map(( item: any ) => {
 
-                const img = item.images.full_background === null 
-                    ? item.images.icon_background.replace('icon_background', 'background') 
-                    : item.images.icon_background;
-
+                const img =  item.images.icon_background;
                 return (
                     <li>
                         <Card 
                             href={`/cosmetic/${item.id}`} 
                             image={img} 
-                            title={item.name} 
+                            title={item.name}
                         />
                     </li>
                 )
