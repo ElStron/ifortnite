@@ -2,6 +2,8 @@ import { dailyShop } from "./endpoints"
 import { fetchData } from "./fetch"
 
 export function filterItemsBySection(items: any) {
+    if (!items) return
+    
     const sections: { id: string; name: string; price: number; items?: any[] }[] = [];
 
     for (const item of items) {
@@ -26,22 +28,24 @@ export function filterItemsBySection(items: any) {
     return sections;
 }
 
+export function filterByNewest(items: any) {
+    items.map((item: any) => {
+        if(item.banner && item.banner.name === 'new') {
+            return item
+        }
+    })
+    return []
+}
 
 export const getDailyShop = async ( { 
     lang = 'en',
     type = undefined,
-    filter  
 }:{ 
     lang: string | undefined, 
     type?: string | undefined
-    filter?: string 
-
 }) => {
     let data = await fetchData(dailyShop({ lang: lang }))
     
-    if (filter === 'section') {
-        return data.shop = filterItemsBySection(data.shop)
-    }
     
     return data
 }
