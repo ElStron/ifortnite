@@ -2,7 +2,7 @@ export interface Shop {
     result: boolean
     fullShop: boolean
     lastUpdate: LastUpdate
-    currentRotation: CurrentRotation
+    currentRotation?: any
     nextRotation: any
     carousel: any
     specialOfferVideo: any
@@ -14,25 +14,7 @@ export interface Shop {
     date: string
     uid: string
   }
-  
-  export interface CurrentRotation {
-    "JamTracks.99": string
-    "RufusInvincible.98": string
-    "LEGOMarvel.97": string
-    "JamTracks.98": string
-    "RufusInvincible.99": string
-    "SignatureStyleNewCategory.99": string
-    "Trailblazers.98": string
-    "TheWeeknd.99": string
-    "JamTracks.97": string
-    "Trailblazers.97": string
-    "LEGOMarvel.98": string
-    "StartYourEngines.Jager619.99": string
-    "SignatureStyleNewCategory.98": string
-    "Trailblazers.99": string
-    "LEGOMarvel.99": string
-    "GearForFestival.99": string
-  }
+
   
   export interface Item {
     mainId: string
@@ -128,11 +110,11 @@ export interface Shop {
   }
   
   export interface Images {
-    icon: string
+    icon?: string
     featured?: string
-    background: string
-    icon_background: string
-    full_background: string
+    background?: string
+    icon_background?: string
+    full_background?: string
   }
   
   export interface Set {
