@@ -55,9 +55,14 @@ const image = dafaultImage({url});
                 <summary class="text-lg font-bold text-gray-900 dark:text-white">Shop History</summary>
                 <ol>
                     {
-                        shopHistory && shopHistory.map((item) => {
+                        shopHistory && shopHistory.map((date) => {
                             return (
-                                <li class="text-lg font-normal text-gray-500 dark:text-gray-400 py-1">{item}</li>
+                                <li class="text-lg font-normal text-gray-500 dark:text-gray-400 py-1">
+                                    <a 
+                                        class="hover:underline"
+                                        href={`/shop/${date}`}>{date}
+                                    </a>
+                                </li>
                             )
                         })
                     }
