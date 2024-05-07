@@ -4,13 +4,29 @@ import Shop from '@/components/sections/Shop.astro';
 import Time from '@/components/sections/Time.astro';
 import Creative from '@/components/sections/Creative.astro';
 import { getI18N } from "@/i18n"
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+import { getDailyShop, filterItemsBySection } from '@/services/dailyShop.ts';
 
+const { currentLocale } = Astro
+const sectionNumber = 2
+const data = await getDailyShop({ lang: currentLocale });
+const sections = filterItemsBySection(data.shop);
+const items = sections ? sections[sectionNumber].items : null 
+const title = sections ? sections[sectionNumber].name : ""
+const i18n = getI18N({ currentLocale })
+const date = new Date(data.lastUpdate.date)
+const nextRotation = data.nextRotation ? new Date(data.nextRotation) : date.setDate(date.getDate() + 1)
+const image  = data.shop[0].displayAssets[0].url
 ---
 
 <Layout title={i18n.HOME.TITLE_SEO} description={i18n.HOME.DESCRIPTION_SEO}>
-    <Time title={i18n.HOME.COUNTER_TITLE} description={i18n.HOME.COUNTER_DESCRIPTION} />
-    <Shop/>
+    <Time 
+        time={data.nextRotation ? data.nextRotation : nextRotation}
+        image={image}
+        title={i18n.HOME.COUNTER_TITLE} 
+        description={i18n.HOME.COUNTER_DESCRIPTION} 
+    />
+    {
+        items && <Shop items={items} title={title}  />
+    }
     <Creative/>
 </Layout>
