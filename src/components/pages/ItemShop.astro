@@ -7,8 +7,13 @@ import { getI18N } from "@/i18n"
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 
+interface Props {
+  date?: string;
+}
+const { date } = Astro.props
 
-const data = await getDailyShop({ lang: currentLocale });
+
+const data = await getDailyShop({ lang: currentLocale, date: date });
 const sections = filterItemsBySection(data.shop);
 ---
 <Layout title={i18n.SHOP.TITLE_SEO} description={i18n.SHOP.DESCRIPTION_SEO}>
