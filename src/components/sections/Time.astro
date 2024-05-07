@@ -2,17 +2,53 @@
 interface Props {
     title: string;
     description: string;
+    time: string | number;
+    image?: string;
 }
-const { title, description } = Astro.props;
+const { title, description, time, image } = Astro.props;
 const url = 'https://media.fortniteapi.io/images/displayAssets/v2/BattleRoyale/DAv2_Sparks_Keytar_Wafer/MI_Sparks_Keytar_Wafer.png'
 ---
 
 <section
     class="overflow-visible relative max-w-sm mx-auto lg:max-w-none bg-white shadow-lg ring-1 ring-black/5 rounded-xl flex items-center gap-6 dark:bg-slate-800 dark:highlight-white/5">
-    <img class="absolute -left-6 w-24 h-24 rounded-full shadow-lg" src={url} alt="time" width="96" height="96" loading="lazy">
+    <!-- <img class="absolute -left-6 w-24 h-24 rounded-full shadow-lg" src={ image ? image : url} alt="time" width="96" height="96" loading="lazy"> -->
+    <div data-image={image ? image : url} hidden> </div>
     <div class="flex flex-col py-5 pl-24">
         <h2 class="text-slate-900 text-lg font-medium dark:text-slate-200">{title}</h2>
+        <span id="time" class="text-slate-500 text-sm font-medium dark:text-slate-400" data-time={time}></span>
         <strong class="text-slate-900 text-sm font-medium dark:text-slate-200">{description}</strong>
-        <span class="text-slate-500 text-sm font-medium dark:text-slate-400">00:00:00</span>
     </div>
 </section>
+
+
+<script is:inline> 
+    window.addEventListener('DOMContentLoaded', () => {
+        const time = document.querySelector('#time')
+        const image = document.querySelector('[data-image]')
+        const date = time.getAttribute('data-time')
+
+        if (image ) {
+            const img = document.createElement('img')
+            img.src = image.getAttribute('data-image')
+            img.classList.add('absolute', '-left-6', 'w-24', 'h-24', 'rounded-full','shadow-lg')
+            image.outerHTML = img.outerHTML
+        }
+
+        setInterval(() => {
+            const now = new Date()
+            const nextRotation =  new Date(parseInt(date));
+            const diff = nextRotation.getTime() - now.getTime()
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+
+            time.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`
+        })
+
+    })
+</script>
