@@ -1,7 +1,9 @@
 ---
 import BaseSection from "@/components/BaseSection.astro";
 import ItemSection from '@/components/ItemSection.astro';
+import { getLangFromUrl, urlForLang } from '@/i18n/utils';
 
+const lang = getLangFromUrl(Astro.url);
 interface Props {
     title: string;
     items: any[];
@@ -9,7 +11,7 @@ interface Props {
 const { title, items } = Astro.props;
 const classStyles = "w-full h-full grid grid-rows-2 gap-4 grid-flow-col p-5 w-full auto-cols-[100px] md:auto-cols-[200px] pl-2 overflow-x-auto"
 ---
-<BaseSection title={title} class:list={[classStyles]}>
+<BaseSection title={title} class:list={[classStyles]} url={urlForLang(lang, '/shop')} urlText="View full shop ->">
     {
         items && items.map((item: any) => (
             <ItemSection item={item}/>
