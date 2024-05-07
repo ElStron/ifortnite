@@ -21,7 +21,8 @@ const {
     description,
     grants,
     displayAssets,
-    images
+    images,
+    shopHistory
  } = data
 
 
@@ -50,6 +51,18 @@ const image = dafaultImage({url});
                 type.name === "Jam Track" && <ButtonPlayer track={name} client:load />
             }
             <p class="text-lg font-bold text-gray-900 dark:text-white">{price} V-Bucks</p>
+            <details class="w-full overflow-auto max-h-[300px]">
+                <summary class="text-lg font-bold text-gray-900 dark:text-white">Shop History</summary>
+                <ol>
+                    {
+                        shopHistory && shopHistory.map((item) => {
+                            return (
+                                <li class="text-lg font-normal text-gray-500 dark:text-gray-400 py-1">{item}</li>
+                            )
+                        })
+                    }
+                </ol>
+            </details>
         </section>
         <section id="hero" class="w-full flex justify-between relative">
             {
@@ -139,8 +152,52 @@ const image = dafaultImage({url});
     }
     #components {
         grid-area: c;
-        scrollbar-color: #f3f4f61a rgb(27 29 37 / 17%);
     }
+
+    #components, details {
+        scrollbar-color: #f3f4f61a rgb(27 29 37 / 17%);        
+    }
+    summary {
+    list-style: none;
+    display: flex; /* also removes the list marker */
+    align-items: center;
+    padding: 10px;
+    font-weight: bold;
+    }
+
+    summary::after {
+    content: '';
+    width: 18px;
+    height: 10px;
+    background: url('https://uploads.sitepoint.com/wp-content/uploads/2023/10/1697699669arrow.svg') no-repeat;
+    background-size: cover;
+    margin-left: .75em;
+    transition: 0.2s;
+    }
+
+    details[open] > summary::after {
+    transform: rotate(180deg);
+    }
+
+    summary::-webkit-details-marker {
+    display: none;
+    }
+
+    summary {
+    background-color: #e792e7;
+    background-image: linear-gradient(90deg, #e792e7 0%, #6eb7f1 100%);
+    color: #30353b;
+    border-radius: 5px;
+    }
+
+    details[open] summary {border-radius: 5px 5px 0 0;}
+
+    details {   
+    background: #1b1b29;
+    padding-left: 10px;
+    border-radius: 5px;
+    }
+
     #item {
         width: 100%;
         height: 100%;
@@ -152,7 +209,7 @@ const image = dafaultImage({url});
     @media screen and (max-width: 768px) {
         #grid__container {
             grid-template-areas: "b" "c" "a";
-            grid-template-rows: auto 150px auto;
+            grid-template-rows: auto 220px auto;
         }
         #hero {
             width: 100%;
