@@ -4,17 +4,26 @@ import ButtonPlayer from '@/components/ButtonPlayer';
 import Vynil from '@/components/Vynil.astro';
 import Link from '@/components/Link.astro';
 import { HOVER } from '@/constants';
+import { getI18N } from "@/i18n"
 
+const i18n = getI18N(Astro);
 interface Props {
     data:string[] | any;
 }
-
 const { data } = Astro.props;
+let seoTitle = i18n.COSMETICS.COSMETIC.TITLE_SEO.replace("{name}", data.name)
+seoTitle = seoTitle.replace("{type}", data.type.name)
+
+let seoDescription = i18n.COSMETICS.COSMETIC.DESCRIPTION_SEO.replace("{name}", data.name)
+seoDescription = seoDescription.replace("{type}", data.type.name)
+seoDescription = seoDescription.replace("{rarity}", data.rarity.name)
+seoDescription = seoDescription.replace("{price}", data.price)
+
 const grants = data.grants
 const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.images.icon;
 
 ---
-<Layout title={data.name}>
+<Layout title={seoTitle} description={seoDescription}>
     <div class="w-full mx-auto relative gap-4" id="grid__container">
         <section class="max-w-[480px] w-full p-6 flex flex-col gap-2" id="details">
             <div id="info" class="flex gap-3 text-white items-center mb-4 uppercase text-md font-bold italic">
@@ -26,7 +35,7 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
             {
                 data.type.name === "Jam Track" && <ButtonPlayer track={data.name} client:load />
             }
-            <p class="text-lg font-bold text-gray-900 dark:text-white">{data.price}</p>
+            <p class="text-lg font-bold text-gray-900 dark:text-white">{data.price} V-Bucks</p>
         </section>
         <section id="hero" class="w-full flex justify-between relative">
             {
@@ -63,6 +72,9 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
                                     alt={grant.name}
                                     loading="lazy"  
                                 />
+                                <p class="text-center py-3 text-sm text-gray-900 dark:text-white">
+                                    {grant.name}
+                                </p>
                             </Link>
                         )
                     })
