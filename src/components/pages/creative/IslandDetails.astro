@@ -1,15 +1,120 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import type { Creative } from '@/types/creative.type';
+import { HOVER } from '@/constants';
 
 interface Props {
-    data:string[] | any;
+    data: Creative;
 }
 const { data } = Astro.props;
-const island = data.island;
+const { title, description, image,creatorCode, code, introduction, tags } = data.island;
 ---
 
-<Layout title='Creative'>
-    <h1>{island.title}</h1>
-    <p>{island.description}</p>
-    <img src={island.image} alt={island.title} />
+<Layout title={title} description={description}>
+    <div id="container" class="">
+        <div id="sidebar" class="flex flex-col gap-6">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white italic">{title}</h1>
+            <div class="description">
+                <p>{description}</p>
+                <p>{introduction}</p>
+            </div>
+            <button id="copy" class=`bg-yellow-400 text-[#000] font-bold text-2xl font-bold rounded-xl py-3 px-2 text-center ${HOVER}`>
+             { code }
+            </button>
+            <p class="text-gray-500 dark:text-gray-400 italic">
+                By {creatorCode}
+            </p>
+            <div id="tags" class="flex flex-wrap gap-3">
+                {
+                    tags.map((tag : any ) => {
+                        return <span class="text-gray-500 dark:text-gray-400 p-4 bg-gray-700 rounded">{tag}</span>
+                    })
+                }
+            </div>
+        </div>
+        <div id="contentBackground" class="relative">
+            <div id="activeUsersContainer" class="flex items-center gap-3 absolute top-0 right-0 m-4 pr-4 z-10 flex-row bg-gray-900 rounded-md">
+                <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor"><path d="M16.429 11a5 5 0 1 1-10 0 5 5 0 0 1 10 0ZM4.774 22.502C4.104 20.257 5.784 18 8.127 18h6.604c2.342 0 4.024 2.257 3.353 4.502L17.04 26H5.82l-1.045-3.498ZM24.429 13a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-4.878 13h5.911l1.507-2.876c1.22-2.33-.47-5.124-3.1-5.124h-5.43a3.62 3.62 0 0 0-.422.024c2.248.264 3.702 2.62 2.824 4.79L19.551 26Z"></path></svg>
+                <strong id="activeUsers">1000</strong>
+            </div>
+            <img
+                class="w-full h-full object-cover rounded-lg shadow-lg bg-[rgba(0,0,0,0.2)]" 
+                src={image} 
+                alt={title}
+            />
+        </div>
+    </div>
 </Layout>
+
+<style>
+    #container {
+        display: grid;
+        grid-template-columns: 500px auto;
+        grid-template-rows: auto;
+        grid-template-areas: "a b";
+
+    }
+
+    @media (width < 768px) {
+        #container {
+            grid-template-columns: auto;
+            grid-template-areas: "b" "a";
+        }
+        img {
+            mask-image: linear-gradient(to top, transparent, #000) !important;
+        }
+    }
+    #sidebar {
+        grid-area: a;
+    }
+    #contentBackground {
+        grid-area: b;
+    }
+
+    img {
+
+        mask-image: linear-gradient(to right, transparent, #000);
+    }
+
+    #activeUsers {
+        transition: all 0.3s ease;
+    }
+</style>
+
+<script is:inline>
+    window.addEventListener('DOMContentLoaded', async () => {
+        const activeUsers = document.querySelector('#activeUsers');
+        const button = document.querySelector('#copy');
+
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const textContent = button.textContent;
+            navigator.clipboard.writeText(textContent);
+
+            setTimeout(() => {
+            button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = textContent;
+                }, 1000);
+            }, 1000); 
+        });
+
+        const code = button.textContent.trim();
+        const getUsers = await getActiveUsers(code);
+        activeUsers.innerHTML = getUsers.players;
+        
+        setInterval(async () => {
+            const users = await getActiveUsers(code);
+            activeUsers.innerHTML = users.players;
+        } , 3000);
+    });
+
+    const getActiveUsers = async ( code ) => {
+        const response = await fetch('/api/playerCount.json?code=' + code);
+        const data = await response.json();
+        return data
+    }
+
+
+</script>
