@@ -1,49 +1,63 @@
 ---
-import Layout from '@/layouts/Layout.astro';
 import ButtonPlayer from '@/components/ButtonPlayer';
-import Vynil from '@/components/Vynil.astro';
 import Link from '@/components/Link.astro';
+import Vynil from '@/components/Vynil.astro';
 import { HOVER } from '@/constants';
-import { getI18N } from "@/i18n"
+import { getI18N } from "@/i18n";
+import Layout from '@/layouts/Layout.astro';
+import type { Grant, Item } from '@/types/cosmetic.type';
+import dafaultImage from '@/utils/defaultImage';
 
 const i18n = getI18N(Astro);
 interface Props {
-    data:string[] | any;
+    data: Item;
 }
 const { data } = Astro.props;
-let seoTitle = i18n.COSMETICS.COSMETIC.TITLE_SEO.replace("{name}", data.name)
-seoTitle = seoTitle.replace("{type}", data.type.name)
+const { 
+    name, 
+    type, 
+    rarity, 
+    price, 
+    description,
+    grants,
+    displayAssets,
+    images
+ } = data
 
-let seoDescription = i18n.COSMETICS.COSMETIC.DESCRIPTION_SEO.replace("{name}", data.name)
-seoDescription = seoDescription.replace("{type}", data.type.name)
-seoDescription = seoDescription.replace("{rarity}", data.rarity.name)
-seoDescription = seoDescription.replace("{price}", data.price)
 
-const grants = data.grants
-const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.images.icon;
+const seoTitle = i18n.COSMETICS.COSMETIC.TITLE_SEO.replace("{name}", name)
+  .replace("{type}", type.name);
 
+const seoDescription = i18n.COSMETICS.COSMETIC.DESCRIPTION_SEO
+  .replace("{name}", name)
+  .replace("{type}", type.name)
+  .replace("{rarity}", rarity.name)
+  .replace("{price}", price.toString());
+
+const url = displayAssets.length > 0 ? displayAssets[0].url : images.icon;
+const image = dafaultImage({url});
 ---
 <Layout title={seoTitle} description={seoDescription}>
     <div class="w-full mx-auto relative gap-4" id="grid__container">
         <section class="max-w-[480px] w-full p-6 flex flex-col gap-2" id="details">
             <div id="info" class="flex gap-3 text-white items-center mb-4 uppercase text-md font-bold italic">
-                <span class="px-3 py-1 rounded bg-cyan-800">{data.rarity.name}</span>
-                <span>{data.type.name}</span>
+                <span class="px-3 py-1 rounded bg-cyan-800">{rarity.name}</span>
+                <span>{type.name}</span>
             </div>
-            <h1 class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white "><i>{data.name}</i></h1>
-            <p class="text-lg font-normal text-gray-500 dark:text-gray-400 py-4">{data.description}</p>
+            <h1 class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white "><i>{name}</i></h1>
+            <p class="text-lg font-normal text-gray-500 dark:text-gray-400 py-4">{description}</p>
             {
-                data.type.name === "Jam Track" && <ButtonPlayer track={data.name} client:load />
+                type.name === "Jam Track" && <ButtonPlayer track={name} client:load />
             }
-            <p class="text-lg font-bold text-gray-900 dark:text-white">{data.price} V-Bucks</p>
+            <p class="text-lg font-bold text-gray-900 dark:text-white">{price} V-Bucks</p>
         </section>
         <section id="hero" class="w-full flex justify-between relative">
             {
-                data.type.name !==  "Jam Track" 
+                type.name !==  "Jam Track" 
                 ?   <img 
                         id="item" 
                         src={image} 
-                        alt={data.name} 
+                        alt={name} 
                         loading="lazy" 
                         class="aspect-[360/360] sm:aspect-[480/480] lg:aspect-[720/720]" 
                     />
@@ -56,24 +70,25 @@ const image = data.displayAssets.length > 0 ? data.displayAssets[0].url : data.i
             </h2>
             <div class="flex flex-nowrap lg:flex-wrap gap-4 py-4 lg:py-0 pl-2 lg:pl-0">
                 {
-                    grants && grants.map((grant: any) => {
+                    grants && grants.map((grant: Grant) => {
+                        const { id, name, images } = grant
                         return (
                             <Link 
-                                href={`/cosmetic/${grant.id}`} 
+                                href={`/cosmetic/${id}`} 
                                 class="w-[100px] h-[100px] flex-none"
-                                title={grant.name}
+                                title={name}
                             >
                                 <img
                                     class={`w-full h-full object-cover rounded-lg shadow-lg bg-[rgba(0,0,0,0.2)] cursor-pointer ${HOVER}`} 
-                                    src={grant.images.icon}
-                                    title={grant.name}
+                                    src={images.icon}
+                                    title={name}
                                     width="100"
                                     height="100" 
-                                    alt={grant.name}
+                                    alt={name}
                                     loading="lazy"  
                                 />
                                 <p class="text-center py-3 text-sm text-gray-900 dark:text-white">
-                                    {grant.name}
+                                    {name}
                                 </p>
                             </Link>
                         )
