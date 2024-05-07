@@ -1,6 +1,12 @@
 ---
 import ItemShop from '@/components/pages/ItemShop.astro';
+import { isValidDate } from '@/utils/isValidDate';
 const { date } = Astro.params
+
+if (!isValidDate(date as string)) {
+    return Astro.redirect('/404')
+}
+
 ---
 
 <ItemShop date={date} />
