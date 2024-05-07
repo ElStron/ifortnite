@@ -14,7 +14,9 @@ const { title, description, image = '/' } = Astro.props;
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="canonical" href={canonicalURL} />
-<meta name="robots" content="noindex">
+{
+	Astro.url.pathname.indexOf('beta') !== -1 ? <meta name="robots" content="noindex, nofollow" /> : null
+}
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta property="og:type" content="website" />
