@@ -39,12 +39,15 @@ export function filterByNewest(items: any) {
 
 export const getDailyShop = async ( { 
     lang = 'en',
+    date,
     type = undefined,
 }:{ 
-    lang: string | undefined, 
+    lang: string | undefined,
+    date?: string | undefined, 
     type?: string | undefined
 }) => {
 
-    let data = await fetchData(dailyShop({ lang: lang }))
+    const url = date ? dailyShop({ lang: lang}) + `&date=${date}` : dailyShop({ lang: lang })
+    let data = await fetchData( url )
     return data
 }
