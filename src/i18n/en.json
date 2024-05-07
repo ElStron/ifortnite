@@ -30,7 +30,13 @@
         "TITLE_SEO": "Today's Current FORTNITE ITEM SHOP | iFortnite.com",
         "DESCRIPTION_SEO": "Daily updates from the Fortnite Shop, discover the latest items (cosmetics, emotes, skins, and more). Receive updates every day for Fortnite Battle Royale.",
         "TITLE": "Current <strong>Fortnite</strong> Item Shop",
-        "DESCRIPTION": "Check out the current item shop. New items are added every 24 hours. Discover new items and get exclusive offers. Skins, bundles, emotes, cosmetics, and more. Last updated on "
+        "DESCRIPTION": "Check out the current item shop. New items are added every 24 hours. Discover new items and get exclusive offers. Skins, bundles, emotes, cosmetics, and more. Last updated on ",
+        "BY_DATE" : {
+            "TITLE": "FORTNITE Items Store <strong>{date}</strong>",
+            "DESCRIPTION": "Discover the Fortnite store items for {date}.",
+            "TITLE_SEO": "FORTNITE Items Store {date} | iFortnite.com",
+            "DESCRIPTION_SEO": "Check out today's items in the Fortnite store {date}."
+        }
     },
     "CREATIVE": {
         "TITLE_SEO": "Creative",

@@ -30,7 +30,13 @@
         "TITLE_SEO": "Tienda de artículos de FORTNITE de hoy | iFortnite.com",
         "DESCRIPTION_SEO": "Actualizaciones todos los dias de la Tienda Fortnite, últimos artículos (cosméticos, emotes, skins y mucho más). Recibe actualizaciones sobre Fortnite Battle Royale",
         "TITLE": "Tienda diaria de objetos de <strong>Fortnite</strong>",
-        "DESCRIPTION": "Descubre que hay de nuevo hoy en la tienda de objetos de Fortnite. Cada 24 horas se añaden nuevos artículos. Descubre nuevos objetos y consigue ofertas exclusivas. Skins, bundles, emotes, cosméticos y mucho más. Última actualización el "
+        "DESCRIPTION": "Descubre que hay de nuevo hoy en la tienda de objetos de Fortnite. Cada 24 horas se añaden nuevos artículos. Descubre nuevos objetos y consigue ofertas exclusivas. Skins, bundles, emotes, cosméticos y mucho más. Última actualización el ",
+        "BY_DATE" : {
+            "TITLE": "Tienda de artículos de FORTNITE <strong>{date}</strong> ",
+            "DESCRIPTION": "Descubre los articulos de la tienda de fortnite de {date}.",
+            "TITLE_SEO":  "Tienda de objetos de FORTNITE {date} | iFortnite.com",
+            "DESCRIPTION_SEO": "Mira los articulas de la tienda de objetos de hoy {date} en fortnite"
+        }
     },
     "CREATIVE": {
         "TITLE_SEO": "Creativo",
