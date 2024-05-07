@@ -11,18 +11,32 @@ interface Props {
   date?: string;
 }
 const { date } = Astro.props
-
-
 const data = await getDailyShop({ lang: currentLocale, date: date });
+
+let seoTitle = i18n.SHOP.TITLE_SEO
+let seoDescription = i18n.SHOP.DESCRIPTION_SEO
+let title = i18n.SHOP.TITLE
+let description = i18n.SHOP.DESCRIPTION
+let lastUpdate = data.lastUpdate.date
+
+if (date) {
+  seoTitle = i18n.SHOP.BY_DATE.TITLE_SEO.replace("{date}", date)
+  seoDescription = i18n.SHOP.BY_DATE.DESCRIPTION_SEO.replace("{date}", date)
+  title = i18n.SHOP.BY_DATE.TITLE.replace("{date}", date)
+  description = i18n.SHOP.BY_DATE.DESCRIPTION.replace("{date}", date)
+  lastUpdate = "";
+}
+
+
 const sections = filterItemsBySection(data.shop);
 ---
-<Layout title={i18n.SHOP.TITLE_SEO} description={i18n.SHOP.DESCRIPTION_SEO}>
+<Layout title={seoTitle} description={seoDescription}>
 
   <section class="w-full mx-auto p-3 text-balance" id="hero">
-    <h1 class="mb-2 text-xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-3xl" set:html={i18n.SHOP.TITLE}>
+    <h1 class="mb-2 text-xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-3xl" set:html={title}>
     </h1>
     <p class="text-[16px] font-normal text-gray-500 dark:text-gray-400 text-pretty">
-      {i18n.SHOP.DESCRIPTION} <span class="font-bold">{data.lastUpdate.date}</span>
+      {description} <span class="font-bold">{lastUpdate}</span>
     </p>
   </section>
 
