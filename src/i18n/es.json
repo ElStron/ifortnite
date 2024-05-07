@@ -20,8 +20,8 @@
             "DESCRIPTION": "Próximos cosméticos"
         },
         "COSMETIC": {
-            "TITLE_SEO": "Cosméticos",
-            "DESCRIPTION_SEO": "Cosméticos de la tienda de objetos de FORTNITE de hoy | iFortnite.com",
+            "TITLE_SEO": "{name} | Fortnite {type} - IFortnite.com",
+            "DESCRIPTION_SEO": "{name} es un cosmético {rarity} perteneciente al conjunto de tipo {type} disponible en la tienda de objetos de Fortnite por el precio de {price} V-Bucks.",
             "TITLE": "Cosméticos",
             "DESCRIPTION": "Cosméticos de la tienda de objetos de <strong>Fortnite</strong>"
         }

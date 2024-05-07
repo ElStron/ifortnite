@@ -20,8 +20,8 @@
             "DESCRIPTION": "Upcoming cosmetics"
         },
         "COSMETIC": {
-            "TITLE_SEO": "Cosmetics",
-            "DESCRIPTION_SEO": "Cosmetics in the store | iFortnite.com",
+            "TITLE_SEO": "{name} | Fortnite {type} - IFortnite.com",
+            "DESCRIPTION_SEO": "{name} is a {rarity} cosmetic belonging to the set of type {type} available in the Fortnite item shop for the price of {price} V-Bucks.",
             "TITLE": "Cosmetics",
             "DESCRIPTION": "Cosmetics in the store"
         }
