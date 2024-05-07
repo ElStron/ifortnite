@@ -2,14 +2,21 @@
 interface Props {
     title: string;
     class?: string;
+    url?: string;
+    urlText?: string;
 }
-const { title, class:ClassName } = Astro.props;
+const { title, class:ClassName, url, urlText } = Astro.props;
 const olDefaultClass = 'w-full mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4: lg:grid-cols-5 gap-6'
 const cl = ClassName || olDefaultClass
 ---
 
 <section class="w-full mx-auto p-6 bg-gray-800 rounded-2xl ">
-    <h2 class="text-lg font-black text-gray-900 dark:text-white my-4 italic uppercase">{title}</h2>
+    <div class="flex flex-row justify-between">
+        <h2 class="text-lg font-black text-gray-900 dark:text-white my-4 italic uppercase">{title}</h2>
+        {
+            url && <a href={url} class="text-sm font-bold text-gray-500 dark:text-gray-400">{urlText}</a>
+        }
+    </div>
     <ol class={cl}>
         <slot/> 
     </ol>
