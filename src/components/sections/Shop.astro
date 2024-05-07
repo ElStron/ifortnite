@@ -1,14 +1,12 @@
 ---
 import BaseSection from "@/components/BaseSection.astro";
 import ItemSection from '@/components/ItemSection.astro';
-import { getDailyShop, filterItemsBySection } from '@/services/dailyShop.ts';
 
-const { currentLocale } = Astro
-const sectionNumber = 2
-const data = await getDailyShop({ lang: currentLocale });
-const sections = filterItemsBySection(data.shop);
-const items = sections ? sections[sectionNumber].items : null 
-const title = sections ? sections[sectionNumber].name : ""
+interface Props {
+    title: string;
+    items: any[];
+}
+const { title, items } = Astro.props;
 const classStyles = "w-full h-full grid grid-rows-2 gap-4 grid-flow-col p-5 w-full auto-cols-[100px] md:auto-cols-[200px] pl-2 overflow-x-auto"
 ---
 <BaseSection title={title} class:list={[classStyles]}>
