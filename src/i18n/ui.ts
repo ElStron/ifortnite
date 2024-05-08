@@ -12,6 +12,7 @@ export const languages = {
       'nav.creative': 'Creative',
       'nav.shop': 'Shop',
       'nav.more': 'More',
+      'nav.news': 'News',
     },
     es: {
       'nav.home': 'Inicio',
@@ -19,5 +20,6 @@ export const languages = {
       'nav.creative': 'Creativo',
       'nav.shop': 'Tienda',
       'nav.more': 'Más',
+      'nav.news': 'Noticias',
     },
   } as const;
