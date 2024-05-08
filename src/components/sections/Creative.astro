@@ -13,13 +13,11 @@ const FIRST_ISLAND = 1
         data[FIRST_ISLAND].islands.map((island: any) => {
             return (
                 <li>
-                    <a href={`/creative/${island.islandCode}`}>
-                        <IslandCard 
-                            code={island.islandCode} 
-                            image={island.imgSrc} 
-                            title={island.title} 
-                        />
-                    </a>
+                    <IslandCard 
+                        code={island.islandCode} 
+                        image={island.imgSrc} 
+                        title={island.title} 
+                    />
                 </li>
             )
         })
