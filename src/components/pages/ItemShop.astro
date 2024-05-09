@@ -48,13 +48,16 @@ const sections = filterItemsBySection(shop.shop);
         {description} <span class="font-bold">{lastUpdate}</span>
       </p>
     </div>
-    <div class="flex flex-col gap-3">
-      <p class="font-normal text-white">{i18n.HOME.COUNTER_TITLE}</p>
-      <Counter 
-        class='bg-gray-700 p-3 text-white font-bold text-3xl rounded-lg'
-        time={nextRotation as number} 
-      />
-    </div>
+    {
+      !date && 
+        <div class="flex flex-col gap-3">
+          <p class="font-normal text-white">{i18n.HOME.COUNTER_TITLE}</p>
+          <Counter 
+            class='bg-gray-700 p-3 text-white font-bold text-3xl rounded-lg'
+            time={nextRotation as number} 
+          />
+        </div> 
+    }
   </section>
 
   <section class="w-full mx-auto custom-scrollbar">
