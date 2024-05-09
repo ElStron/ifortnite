@@ -11,7 +11,6 @@ export async function fetchData(url: string) {
             }
         })
         if (!response.ok) {
-            console.log(response)
             throw new Error('Failed to fetch data')
         }
 
@@ -19,7 +18,6 @@ export async function fetchData(url: string) {
         return data
     }
     catch (error) {
-        console.log(error)
     }
 }
 
