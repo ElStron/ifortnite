@@ -1,12 +1,18 @@
 ---
 import ItemShop from '@/components/pages/ItemShop.astro';
 import { isValidDate } from '@/utils/isValidDate';
+import { getDailyShop } from '@/services/dailyShop.ts'
+
 const { date } = Astro.params
-
+const { currentLocale } = Astro
 if (!isValidDate(date as string)) {
-    return Astro.redirect('/404')
+    return Astro.redirect('/shop', 301);
 }
+const data = await getDailyShop({ lang: currentLocale, date: date });
 
+if (!data) {
+    return Astro.redirect('/shop', 301);
+}
 ---
 
-<ItemShop date={date} />
+<ItemShop date={date} data={data} />
