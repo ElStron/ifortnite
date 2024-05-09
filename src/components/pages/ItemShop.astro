@@ -4,6 +4,7 @@ import Layout from '@/layouts/Layout.astro';
 import type { Item } from '@/models/shop.type.ts';
 import { filterItemsBySection, getDailyShop } from '@/services/dailyShop.ts'
 import { getI18N } from "@/i18n"
+import Counter from '../Counter.astro';
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 
@@ -20,7 +21,12 @@ let seoTitle = i18n.SHOP.TITLE_SEO
 let seoDescription = i18n.SHOP.DESCRIPTION_SEO
 let title = i18n.SHOP.TITLE
 let description = i18n.SHOP.DESCRIPTION
-let lastUpdate = data?.lastUpdate ? data.lastUpdate.date : "";
+let lastUpdate = shop.lastUpdate.date
+
+const dateRotation = new Date(lastUpdate)
+const nextRotation = shop.nextRotation 
+  ? new Date(shop.nextRotation) 
+  : dateRotation.setDate(dateRotation.getDate() + 1)
 
 if (date) { 
   seoTitle = i18n.SHOP.BY_DATE.TITLE_SEO.replace("{date}", date)
@@ -34,12 +40,21 @@ const sections = filterItemsBySection(shop.shop);
 ---
 <Layout title={seoTitle} description={seoDescription}>
 
-  <section class="w-full mx-auto p-3 text-balance" id="hero">
-    <h1 class="mb-2 text-xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-3xl" set:html={title}>
-    </h1>
-    <p class="text-[16px] font-normal text-gray-500 dark:text-gray-400 text-pretty">
-      {description} <span class="font-bold">{lastUpdate}</span>
-    </p>
+  <section class="flex flex-col items-center md:flex-row md:justify-between gap-3" id="hero">
+    <div class="w-full p-3 text-balance max-w-[700px]">
+      <h1 class="mb-2 text-xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-3xl" set:html={title}>
+      </h1>
+      <p class="text-[16px] font-normal text-gray-500 dark:text-gray-400 text-pretty">
+        {description} <span class="font-bold">{lastUpdate}</span>
+      </p>
+    </div>
+    <div class="flex flex-col gap-3">
+      <p class="font-normal text-white">{i18n.HOME.COUNTER_TITLE}</p>
+      <Counter 
+        class='bg-gray-700 p-3 text-white font-bold text-3xl rounded-lg'
+        time={nextRotation as number} 
+      />
+    </div>
   </section>
 
   <section class="w-full mx-auto custom-scrollbar">
