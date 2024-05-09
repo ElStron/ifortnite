@@ -1,0 +1,24 @@
+---
+interface Props {
+    time: number;
+    class?: string
+}
+const { time, class: className } = Astro.props
+---
+<time id="time" class={className} data-time={time}>00:00:00</time>
+<script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+        const time = document.querySelector('#time')
+        const date = time.getAttribute('data-time')
+        setInterval(() => {
+            const now = new Date()
+            const nextRotation =  new Date(parseInt(date));
+            const diff = nextRotation.getTime() - now.getTime()
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+            time.innerHTML = `${hours} : ${minutes} : ${seconds}`
+        })
+    })
+</script>
