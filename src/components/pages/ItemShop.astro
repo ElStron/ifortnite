@@ -2,24 +2,27 @@
 import Section from '@/components/Section.astro';
 import Layout from '@/layouts/Layout.astro';
 import type { Item } from '@/models/shop.type.ts';
-import { getDailyShop, filterItemsBySection } from '@/services/dailyShop.ts'
+import { filterItemsBySection, getDailyShop } from '@/services/dailyShop.ts'
 import { getI18N } from "@/i18n"
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 
 interface Props {
   date?: string;
+  data?: any
 }
-const { date } = Astro.props
-const data = await getDailyShop({ lang: currentLocale, date: date });
+const { date, data } = Astro.props
+let shop = data 
+  ? data 
+  : await getDailyShop({ lang: currentLocale, date: date });
 
 let seoTitle = i18n.SHOP.TITLE_SEO
 let seoDescription = i18n.SHOP.DESCRIPTION_SEO
 let title = i18n.SHOP.TITLE
 let description = i18n.SHOP.DESCRIPTION
-let lastUpdate = data.lastUpdate.date
+let lastUpdate = data?.lastUpdate ? data.lastUpdate.date : "";
 
-if (date) {
+if (date) { 
   seoTitle = i18n.SHOP.BY_DATE.TITLE_SEO.replace("{date}", date)
   seoDescription = i18n.SHOP.BY_DATE.DESCRIPTION_SEO.replace("{date}", date)
   title = i18n.SHOP.BY_DATE.TITLE.replace("{date}", date)
@@ -27,8 +30,7 @@ if (date) {
   lastUpdate = "";
 }
 
-
-const sections = filterItemsBySection(data.shop);
+const sections = filterItemsBySection(shop.shop);
 ---
 <Layout title={seoTitle} description={seoDescription}>
 
