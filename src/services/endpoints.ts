@@ -2,7 +2,7 @@ export const ENDPOINTS = {
     'v1': 'https://fortniteapi.io/v1',
     'v2': 'https://fortniteapi.io/v2',
     'v3': 'https://fortniteapi.io/v3',
-    'v4': 'https://race.f1calendar.live',
+    'v4': 'https://race-live.onrender.com',
 }
 
 
