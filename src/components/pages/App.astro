@@ -7,7 +7,7 @@ import { getI18N } from "@/i18n"
 import { getDailyShop, filterItemsBySection } from '@/services/dailyShop.ts';
 
 const { currentLocale } = Astro
-const sectionNumber = 2
+const sectionNumber = 0
 const data = await getDailyShop({ lang: currentLocale });
 const sections = filterItemsBySection(data.shop);
 const items = sections ? sections[sectionNumber].items : null 
