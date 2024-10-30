@@ -6,7 +6,7 @@ import { getCreative } from '@/services/creative.ts'
 const { currentLocale } = Astro
 
 const data = await getCreative({lang: currentLocale});
-const FIRST_ISLAND = 1
+const FIRST_ISLAND = 3
 ---
 <BaseSection title={data[FIRST_ISLAND].category.label}>
     {
