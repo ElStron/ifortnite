@@ -18,6 +18,7 @@ export async function fetchData(url: string) {
         return data
     }
     catch (error) {
+        return []
     }
 }
 
