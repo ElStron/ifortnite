@@ -1,6 +1,7 @@
 import { creativeList } from "./endpoints"
 import { fetchItems } from "./fetch"
-
+import creativeEs from "../data/creative_es.json"
+import creativeEn from "../data/creative_en.json"
 
 const pagination = (data: any, page: number, itemsPerPage: number | undefined) => {
     const itemsNumber = itemsPerPage ? itemsPerPage : 10
@@ -17,7 +18,8 @@ export const getCreative = async ( {
     page?: number | undefined
     itemsPerPage?: number | undefined 
 }) => {
-    let data = await fetchItems(creativeList({ lang: lang }))
+    //let data = await fetchItems(creativeList({ lang: lang }))
+    let data = lang == 'es' ? creativeEs : creativeEn;
     if (page) {
         data = pagination(data, page, itemsPerPage)
     }
