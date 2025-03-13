@@ -9,10 +9,6 @@ export const POST: APIRoute = async ({ request }) => {
         method: 'POST',
     });  
 
-    await fetch(IF_UPDATE_URL, {
-        method: 'POST'
-    })
-
     return new Response(
         
         JSON.stringify(
