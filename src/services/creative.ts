@@ -17,7 +17,8 @@ export const getCreative = async ( {
     page?: number | undefined
     itemsPerPage?: number | undefined 
 }) => {
-    let data = await fetchItems(creativeList({ lang: lang }))
+    //let data = await fetchItems(creativeList({ lang: lang }))
+    let data = lang == 'es' ? creativeEs : creativeEn;
     if (page) {
         data = pagination(data, page, itemsPerPage)
     }
